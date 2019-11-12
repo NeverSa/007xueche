@@ -17,8 +17,8 @@
           <img src="./assets/img/log.png" alt class="log_img" />
         </div>
         <div class="memu_list">
-          <a :class="{'active':index=='首页'}">首页</a>
-          <a :class="{'active':index=='驾校'}">驾校</a>
+          <a :class="{'active':index=='首页'}"  @click="jump('/index');index='首页'">首页</a>
+          <a :class="{'active':index=='驾校'}"  @click="jump('/coach');index='驾校'">驾校</a>
         </div>
       </div>
       <swiper :options="swiperOption" ref="mySwiper">
@@ -57,6 +57,11 @@ export default {
         loop: true
       }
     };
+  },
+  methods:{
+    jump(url){
+     this.$router.push(url)
+    }
   },
   computed: {
     swiper() {
