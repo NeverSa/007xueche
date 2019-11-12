@@ -39,6 +39,13 @@
       </swiper>
     </div>
     <router-view />
+    <div class="copy_right">
+      <div>
+        <img src="./assets/img/log.png" alt class="bottom_log" />
+      </div>
+
+      <a href="http://beian.miit.gov.cn/" target="_blank">浙ICP备09002072号-3</a>
+    </div>
   </div>
 </template>
 <script>
@@ -69,10 +76,18 @@ body,
 html {
   margin: 0;
   padding: 0;
-  font-family: 'Microsoft YaHei', sans-serif ;
-
+  font-family: "Microsoft YaHei", sans-serif;
 }
-
+.copy_right {
+  background: #f9f9f9;
+  padding: 20px 0px;
+  a {
+    color: #999;
+  }
+  .bottom_log {
+    width: 200px;
+  }
+}
 .top_nav {
   background: #f9f9f9;
   padding: 10px;

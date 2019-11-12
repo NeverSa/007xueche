@@ -10,6 +10,10 @@ Vue.use(VueAwesomeSwiper, /* { default global options } */)
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
+
+import scroll from 'vue-seamless-scroll'
+Vue.use(scroll)
+
 Vue.config.productionTip = false
 
 new Vue({
