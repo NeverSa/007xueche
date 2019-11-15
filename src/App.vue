@@ -19,6 +19,7 @@
         <div class="memu_list">
           <a :class="{'active':index=='首页'}"  @click="jump('/index');index='首页'">首页</a>
           <a :class="{'active':index=='驾校'}"  @click="jump('/coach');index='驾校'">驾校</a>
+            <a :class="{'active':index=='训练场地'}"  @click="jump('/practicecar');index='驾校'">训练场地</a>
         </div>
       </div>
       <swiper :options="swiperOption" ref="mySwiper">

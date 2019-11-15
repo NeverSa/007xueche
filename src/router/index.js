@@ -14,6 +14,13 @@ const routes = [
     component: () => import('@/views/coach.vue'),
 
   },
+  {
+    path: '/practicecar',
+    name: 'practicecar',
+    component: () => import('@/views/practicecar.vue'),
+
+  },
+  
 ]
 
 const router = new VueRouter({
