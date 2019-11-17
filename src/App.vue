@@ -17,27 +17,17 @@
           <img src="./assets/img/log.png" alt class="log_img" />
         </div>
         <div class="memu_list">
-          <a :class="{'active':index=='首页'}"  @click="jump('/index');index='首页'">首页</a>
-          <a :class="{'active':index=='驾校'}"  @click="jump('/coach');index='驾校'">驾校</a>
-            <a :class="{'active':index=='训练场地'}"  @click="jump('/practicecar');index='驾校'">训练场地</a>
+          <a :class="{'active':$route.path=='/index'}" @click="jump('/index')">首页</a>
+           <a :class="{'active':$route.path=='/practicetest'}" @click="jump('/practicetest')">模拟考试</a>
+          <a :class="{'active':$route.path=='/coach'}" @click="jump('/coach')">驾校</a>
+          <a :class="{'active':$route.path=='/practicecar'}" @click="jump('/practicecar')">训练场地</a>
+          <a
+            :class="{'active':$route.path=='/notesapplication'}"
+            @click="jump('/notesapplication')"
+          >报名须知</a>
         </div>
       </div>
-      <swiper :options="swiperOption" ref="mySwiper">
-        <!-- slides -->
-        <swiper-slide>
-          <img
-            src="//pic5.58cdn.com.cn//brandads/n_v2f0e76515e929459b8515e270b9abfed1_5725c6ad31bf6884.png?h=360&w=1903&ss=1&crop=1&cpos=middle"
-            alt
-          />
-        </swiper-slide>
-        <swiper-slide>
-          <img
-            src="//pic5.58cdn.com.cn//brandads/n_v2456fe322261540a49bc75cbf4a1c9efd_4329f6901bd95b57.png?h=360&w=1903&ss=1&crop=1&cpos=middle"
-            alt
-          />
-        </swiper-slide>
-        <!-- Optional controls -->
-      </swiper>
+  
     </div>
     <router-view />
     <div class="copy_right">
@@ -59,9 +49,10 @@ export default {
       }
     };
   },
-  methods:{
-    jump(url){
-     this.$router.push(url)
+  created() {},
+  methods: {
+    jump(url) {
+      this.$router.push(url);
     }
   },
   computed: {
