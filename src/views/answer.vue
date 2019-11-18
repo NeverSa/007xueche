@@ -5,7 +5,7 @@
         <span class="round">{{detail.type==2?'单选题':'判断题'}}</span>
       </div>
       <div class="right">
-        <div class="questiopn">1/1433 年满20周岁，可以初次申请下列哪种准驾车型？</div>
+        <div class="questiopn">{{index+1}}/{{idList.length}} {{detail.question}}</div>
         <div class="questiopn_item">
           <div class="questiopn_item_left">
             <div class="radio_list">
@@ -14,23 +14,33 @@
                   <i class="iconfont icon-success_no_circle" v-if="getClass(1)=='success'"></i>
                   <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(1)=='error'"></i>
                 </label>
-                <span>{{detail.a}}</span>
+                <span>{{detail.a==''?'正确':detail.a}}</span>
               </div>
               <div class="radio" @click="checkedanswer(2)" :class="getClass(2)">
                 <label for>
                   <i class="iconfont icon-success_no_circle" v-if="getClass(2)=='success'"></i>
                   <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(2)=='error'"></i>
                 </label>
-                <span>{{detail.b}}</span>
+                <span>{{detail.b==''?'错误':detail.b}}</span>
               </div>
-              <div class="radio" @click="checkedanswer(3)" :class="getClass(3)" v-if="detail.type==2">
+              <div
+                class="radio"
+                @click="checkedanswer(3)"
+                :class="getClass(3)"
+                v-if="detail.type==2"
+              >
                 <label for>
                   <i class="iconfont icon-success_no_circle" v-if="getClass(3)=='success'"></i>
                   <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(3)=='error'"></i>
                 </label>
                 <span>{{detail.c}}</span>
               </div>
-              <div class="radio" @click="checkedanswer(4)" :class="getClass(4)" v-if="detail.type==2">
+              <div
+                class="radio"
+                @click="checkedanswer(4)"
+                :class="getClass(4)"
+                v-if="detail.type==2"
+              >
                 <label for>
                   <i class="iconfont icon-success_no_circle" v-if="getClass(4)=='success'"></i>
                   <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(4)=='error'"></i>
@@ -39,7 +49,9 @@
               </div>
             </div>
           </div>
-          <div class="questiopn_item_right"></div>
+          <div class="questiopn_item_right">
+            <img :src="detail.imgurl" alt="">
+          </div>
         </div>
       </div>
     </div>
@@ -48,7 +60,12 @@
       <button @click="changeTitle(1)">下一题</button>
     </div>
     <div class="question_list">
-      <span :class="getListClass(item)" v-for="(item,index) in idList" :key="item.id" @click="getQuestion(item,index)">{{index+1}}</span>
+      <span
+        :class="getListClass(item,index)"
+        v-for="(item,index) in idList"
+        :key="item.id"
+        @click="getQuestion(item,index)"
+      >{{index+1}}</span>
     </div>
   </div>
 </template>
@@ -61,7 +78,7 @@ export default {
       idList: [],
       detail: {},
       radio: "",
-      index:0
+      index: 0
     };
   },
   computed: {
@@ -85,28 +102,32 @@ export default {
     }
   },
   methods: {
-    getListClass(item){
-      let classarr=this.answerList.filter(key => {
+    getListClass(item, index) {
+      let current = "";
+      if (this.index == index) {
+        current = "current";
+      }
+      let classarr = this.answerList.filter(key => {
         return item.id == key.id;
       });
-      if(classarr.length>0){
-        if(classarr[0].answer==classarr[0].select){
-          return "success"
-        }else{
-          return "error"
+      if (classarr.length > 0) {
+        if (classarr[0].answer == classarr[0].select) {
+          current = "success " + current;
+        } else {
+          current = "error " + current;
         }
       }
-      
+      return current;
     },
-    changeTitle(index){
-     if( this.index==0&&index==-1){
-       return
-     }
-     if(this.index==this.idList.length&&index==1){
-    return
-     }
-       this.index=this.index+index;
-      this.getQuestion(this.idList[this.index])
+    changeTitle(index) {
+      if (this.index == 0 && index == -1) {
+        return;
+      }
+      if (this.index == this.idList.length && index == 1) {
+        return;
+      }
+      this.index = this.index + index;
+      this.getQuestion(this.idList[this.index]);
     },
     getClass(type) {
       if (
@@ -140,8 +161,10 @@ export default {
         this.updatAnswer(Object.assign(this.detail, { select: an }));
       }
     },
-    getQuestion(item,index) {
-      this.index=index;
+    getQuestion(item, index) {
+      if (index) {
+        this.index = index;
+      }
       this.$api.getSubject1Question({ id: item.id }).then(res => {
         this.detail = res.data.data;
       });
@@ -243,6 +266,8 @@ export default {
     display: flex;
     flex-wrap: wrap;
     padding-bottom: 30px;
+    height: 300px;
+    overflow-y: scroll;
     span {
       display: inline-block;
       width: 54px;
@@ -252,13 +277,16 @@ export default {
       line-height: 36px;
       cursor: pointer;
     }
-    .success{
-      background: #00c356;
-      color: #fff;
+    .success {
+      background: #00c356 !important;;
+      color: #fff !important;;
     }
-    .error{
-      background: #ff4c2d;
-      color: #fff;
+    .error {
+      background: #ff4c2d !important;
+      color: #fff !important;;
+    }
+    .current {
+      background: #efefef;
     }
   }
 }

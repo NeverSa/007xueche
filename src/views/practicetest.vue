@@ -1,5 +1,15 @@
 <template>
   <div class="notes">
+    <div class="top_bread" >
+     <span style="margin-top:-3px;">位置：</span> 
+      <el-breadcrumb separator-class="el-icon-arrow-right">
+        <el-breadcrumb-item >首页</el-breadcrumb-item>
+        <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
+
     <div class="warper">
       <div class="left_warpe">
         <div class="title">
@@ -22,13 +32,13 @@
           <div class="subj_list">
             <div class="item" @click="answer(1)">
               <span style="background:#4ec1e8">
-                <i class="iconfont  icon-zhangjielianxi"></i>
+                <i class="iconfont icon-zhangjielianxi"></i>
               </span>
               专项练习
             </div>
             <div class="item" @click="answer(2)">
               <span style="background:#ab92ed">
-                 <i class="iconfont  icon-repeat"></i>
+                <i class="iconfont icon-repeat"></i>
               </span>
               顺序练习
             </div>
@@ -36,12 +46,12 @@
           <div class="subj_list">
             <div class="item" @click="answer(1)">
               <span style="background:#4acfad">
-                <i class="iconfont  icon-zhangjielianxi"></i>
+                <i class="iconfont icon-zhangjielianxi"></i>
               </span>专项练习
             </div>
             <div class="item" @click="answer(2)">
               <span style="background:#feb354">
-                 <i class="iconfont  icon-repeat"></i>
+                <i class="iconfont icon-repeat"></i>
               </span>顺序练习
             </div>
           </div>
@@ -61,9 +71,12 @@ export default {
     console.log(this.$route);
   },
   methods: {
-      answer(type){
-          this.$router.push({path:"/answer",query:{subject:this.active,type:type}})
-      },
+    answer(type) {
+      this.$router.push({
+        path: "/answer",
+        query: { subject: this.active, type: type }
+      });
+    },
     jump(url) {
       this.$router.push(url);
     }
@@ -71,8 +84,16 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.top_bread{
+  display: flex;
+  align-items: center;
+width:1200px;margin:0 auto;padding:30px 0px 15px 0px;
+.el-breadcrumb{
+  font-size: 16px;
+}
+}
 .notes {
-    height: 600px;
+  height: 600px;
   .warper {
     width: 1200px;
     margin: 0 auto;
@@ -149,16 +170,16 @@ export default {
             box-sizing: border-box;
             flex-direction: column;
             cursor: pointer;
-            span{
-                display: inline-flex;
-                width: 50px;
-                height: 50px;
-                border-radius: 10px;
-                align-items: center;
-                justify-content: center;
-                font-size: 30px;
-                color: #fff;
-                margin-bottom: 10px;
+            span {
+              display: inline-flex;
+              width: 50px;
+              height: 50px;
+              border-radius: 10px;
+              align-items: center;
+              justify-content: center;
+              font-size: 30px;
+              color: #fff;
+              margin-bottom: 10px;
             }
           }
         }

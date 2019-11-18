@@ -85,6 +85,10 @@ html {
     width: 200px;
   }
 }
+#nav{
+ border-bottom: 1px solid #00c356;
+ padding-bottom: 15px;
+}
 .top_nav {
   background: #f9f9f9;
   padding: 10px;
