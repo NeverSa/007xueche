@@ -276,6 +276,7 @@ export default {
       text-align: center;
       line-height: 36px;
       cursor: pointer;
+      font-size: 12px
     }
     .success {
       background: #00c356 !important;;

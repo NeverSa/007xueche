@@ -10,13 +10,6 @@
     </div>
 
     <div class="warper">
-      <div class="left_warpe">
-        <div class="title">
-          <i class="iconfont icon-cheliangzhihui"></i>
-          <div>车型选择</div>
-        </div>
-        <div class="list" :class="{'active':$route.path=='/notesapplication/index'}">小车</div>
-      </div>
       <div class="right_warpe">
         <div class="title">
           <div class="item" :class="{'active':active==1}" @click="active=1">科目一（交规）</div>
@@ -29,7 +22,7 @@
         </div>
         <div class="contnet">
           <div class="subj_list">
-            <div class="item" @click="answer(1)">
+            <div class="item" @click="answer(1)"  style="border-right:none">
               <span style="background:#4ec1e8">
                 <i class="iconfont icon-zhangjielianxi"></i>
               </span>
@@ -41,9 +34,15 @@
               </span>
               顺序练习
             </div>
+             <div class="item" @click="answer(2)">
+              <span style="background:#ab92ed">
+                <i class="iconfont icon-repeat"></i>
+              </span>
+              考试模拟
+            </div>
           </div>
           <div class="subj_list">
-            <div class="item" @click="answer(1)">
+            <div class="item" @click="answer(1)" style="border-right:none">
               <span style="background:#4acfad">
                 <i class="iconfont icon-zhangjielianxi"></i>
               </span>专项练习
@@ -52,6 +51,12 @@
               <span style="background:#feb354">
                 <i class="iconfont icon-repeat"></i>
               </span>顺序练习
+            </div>
+             <div class="item" @click="answer(2)">
+              <span style="background:#ab92ed">
+                <i class="iconfont icon-repeat"></i>
+              </span>
+              考试模拟1
             </div>
           </div>
         </div>
@@ -135,16 +140,16 @@ width:1200px;margin:0 auto;padding:30px 0px 15px 0px;
     .right_warpe {
       flex: 1;
       background: #fff;
-      border: 1px solid #efefef;
       border-bottom: none;
       .title {
         display: flex;
-        border-bottom: 1px solid #efefef;
+        justify-content: space-between;
         .item {
-          width: 50%;
-          border-right: 1px solid #efefef;
+          width: 48%;
+          border: 1px solid #efefef;
           padding: 15px;
           font-size: 13px;
+              box-sizing: border-box;
           cursor: pointer;
         }
         .active {
@@ -154,8 +159,9 @@ width:1200px;margin:0 auto;padding:30px 0px 15px 0px;
       }
       .contnet {
         display: flex;
+            justify-content: space-between;
         .subj_list {
-          width: 50%;
+          width: 48%;
           display: flex;
           flex-wrap: wrap;
           .item {
@@ -165,10 +171,12 @@ width:1200px;margin:0 auto;padding:30px 0px 15px 0px;
             justify-content: center;
             align-items: center;
             border-bottom: 1px solid #efefef;
-            border-right: 1px solid #efefef;
+            border-left: 1px solid #efefef;
             box-sizing: border-box;
             flex-direction: column;
+              border-right: 1px solid #efefef;
             cursor: pointer;
+           
             span {
               display: inline-flex;
               width: 50px;
