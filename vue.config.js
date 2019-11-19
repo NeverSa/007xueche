@@ -9,11 +9,11 @@ module.exports = {
         ],
       },
     },
-    configureWebpack: {
-      externals: {
-        "BMap": "BMap"
-      }
-    },
+    // configureWebpack: {
+    //   externals: {
+    //     "BMap": "BMap"
+    //   }
+    // },
     // devServer:{
     //   host:"http://localhost/",
     //   port:8080

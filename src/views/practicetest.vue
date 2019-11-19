@@ -3,10 +3,9 @@
     <div class="top_bread" >
      <span style="margin-top:-3px;">位置：</span> 
       <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item >首页</el-breadcrumb-item>
-        <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+        <el-breadcrumb-item >模拟考试</el-breadcrumb-item>
+        <el-breadcrumb-item>{{active==1?'科目一':'科目四'}}</el-breadcrumb-item>
+       
       </el-breadcrumb>
     </div>
 

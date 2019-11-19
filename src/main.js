@@ -14,6 +14,12 @@ Vue.use(ElementUI);
 import scroll from 'vue-seamless-scroll'
 Vue.use(scroll)
 
+import BaiduMap from 'vue-baidu-map'
+Vue.use(BaiduMap, {
+  /* Visit http://lbsyun.baidu.com/apiconsole/key for details about app key. */
+  ak: 'Grov6hqvhrNigr2eD6AGpKMxazQtBgcu'
+})
+
 Vue.config.productionTip = false
 
 new Vue({

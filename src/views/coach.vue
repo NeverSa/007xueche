@@ -17,7 +17,7 @@
           <div class="item" v-for="item in coach_list" :key="item.id">
             <div style="display:flex">
               <div>
-                <img :src="item.image" alt />
+                <img :src="item.image" alt style="width:200px;height:120px;" />
               </div>
               <div class="center">
                 <span class="school_name">{{item.schoolName}}</span>
@@ -28,8 +28,10 @@
               </div>
             </div>
 
-            <div class="money">￥4380</div>
+            <div class="money">￥{{item.fee}}</div>
           </div>
+
+          <el-pagination layout="prev, pager, next" :current-page.sync ="page" :total="50" @current-change="currentChange()"></el-pagination>
         </div>
       </div>
       <div class="right_warp">
@@ -67,6 +69,7 @@ export default {
     return {
       code: "",
       user: {},
+      page: 1,
       areList: [
         {
           code: "",
@@ -109,51 +112,22 @@ export default {
           name: "下沙"
         }
       ],
-      coach_list: [
-        {
-          id: 11,
-          schoolName: "测试驾校", //学校名称
-          location: "浙江省杭州市西湖区三墩心诚驾校", //学校地址
-          image:
-            "//pic1.58cdn.com.cn//nowater/jxt/n_v2bc850e95852f49a09147e197fa15cac6.png?h=120&w=200&ss=1", //图片信息
-          fee: 129.23, //学费
-          discount: 0.8, //折扣
-          score: 5 //评分
-        },
-        {
-          id: 121,
-          schoolName: "测试驾校", //学校名称
-          location: "浙江省杭州市西湖区三墩心诚驾校", //学校地址
-          image:
-            "//pic1.58cdn.com.cn//nowater/jxt/n_v2bc850e95852f49a09147e197fa15cac6.png?h=120&w=200&ss=1", //图片信息
-          fee: 129.23, //学费
-          discount: 0.8, //折扣
-          score: 5 //评分
-        },
-        {
-          id: 121,
-          schoolName: "测试驾校", //学校名称
-          location: "浙江省杭州市西湖区三墩心诚驾校", //学校地址
-          image:
-            "//pic1.58cdn.com.cn//nowater/jxt/n_v2bc850e95852f49a09147e197fa15cac6.png?h=120&w=200&ss=1", //图片信息
-          fee: 129.23, //学费
-          discount: 0.8, //折扣
-          score: 5 //评分
-        },
-        {
-          id: 1212311,
-          schoolName: "测试驾校", //学校名称
-          location: "浙江省杭州市西湖区三墩心诚驾校", //学校地址
-          image:
-            "//pic1.58cdn.com.cn//nowater/jxt/n_v2bc850e95852f49a09147e197fa15cac6.png?h=120&w=200&ss=1", //图片信息
-          fee: 129.23, //学费
-          discount: 0.8, //折扣
-          score: 5 //评分
-        }
-      ]
+      coach_list: []
     };
   },
+  created() {
+    this.querySchool();
+  },
   methods: {
+    currentChange(){
+      this.querySchool()
+    },
+    querySchool() {
+      this.$api.querySchool({ page: this.page }).then(res => {
+        this.coach_list = res.data.data;
+      });
+    },
+
     submitUser() {
       if (this.user.nickName == "" || this.user.nickName == undefined) {
         this.$message.error("姓名不能为空");
