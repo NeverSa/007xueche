@@ -76,10 +76,19 @@ export default {
   },
   methods: {
     answer(type) {
-      this.$router.push({
+      
+      if(type==1){
+       this.$router.push({
+        path: "/specialpractice",
+        query: { subject: this.active, type: type }
+      });
+      }else if(type==2){
+         this.$router.push({
         path: "/answer",
         query: { subject: this.active, type: type }
       });
+      }
+     
     },
     jump(url) {
       this.$router.push(url);

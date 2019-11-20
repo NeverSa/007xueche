@@ -147,7 +147,7 @@ export default {
     ...mapActions(["updatAnswer"]),
     //获取科目一id列表
     getSubject1IdList() {
-      this.$api.getSubject1IdList().then(res => {
+      this.$api.getSubject1IdList({category_id:this.$route.query.category_id}).then(res => {
         this.idList = res.data.data;
         this.getQuestion(this.idList[0]);
       });
@@ -266,7 +266,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     padding-bottom: 30px;
-    height: 300px;
+    max-height: 300px;
     overflow-y: scroll;
     span {
       display: inline-block;

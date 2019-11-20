@@ -33,6 +33,12 @@ const routes = [
 
   },
   {
+    path: '/specialpractice',//专项练习
+    name: 'specialpractice',
+    component: () => import('@/views/specialpractice.vue'),
+
+  },
+  {
     path: '/notesapplication',
     name: 'notesapplication',
     redirect: '/notesapplication/index',
