@@ -50,15 +50,26 @@
             </div>
           </div>
           <div class="questiopn_item_right">
-            <img :src="detail.imgurl" alt="">
+            <img :src="detail.imgurl" alt />
           </div>
         </div>
       </div>
     </div>
     <div class="btn_group">
-      <button @click="changeTitle(-1)">上一题</button>
-      <button @click="changeTitle(1)">下一题</button>
+      <div>
+        <button @click="changeTitle(-1)">上一题</button>
+        <button @click="changeTitle(1)">下一题</button>
+      </div>
+      <div>
+        <el-button type="success" size="small" @click="showResult=!showResult">显示解析</el-button>
+      </div>
     </div>
+    <el-card class="box-card" style="margin:30px 0px;" v-if="showResult">
+      <div slot="header" class="clearfix">
+        <span>官方解析</span>
+      </div>
+      <div class="text item">{{detail.analysis}}</div>
+    </el-card>
     <div class="question_list">
       <span
         :class="getListClass(item,index)"
@@ -78,7 +89,8 @@ export default {
       idList: [],
       detail: {},
       radio: "",
-      index: 0
+      index: 0,
+      showResult:false
     };
   },
   computed: {
@@ -147,10 +159,12 @@ export default {
     ...mapActions(["updatAnswer"]),
     //获取科目一id列表
     getSubject1IdList() {
-      this.$api.getSubject1IdList({category_id:this.$route.query.category_id}).then(res => {
-        this.idList = res.data.data;
-        this.getQuestion(this.idList[0]);
-      });
+      this.$api
+        .getSubject1IdList({ category_id: this.$route.query.category_id })
+        .then(res => {
+          this.idList = res.data.data;
+          this.getQuestion(this.idList[0]);
+        });
     },
     //选题
     checkedanswer(an) {
@@ -175,6 +189,7 @@ export default {
 <style lang="less" scoped>
 .answer {
   width: 1100px;
+  text-align: left;
   margin: 0 auto;
   .question-content {
     display: flex;
@@ -247,6 +262,8 @@ export default {
   .btn_group {
     text-align: left;
     padding: 15px 0px;
+    display: flex;
+    justify-content: space-between;
     button {
       width: 120px;
       height: 36px;
@@ -254,7 +271,6 @@ export default {
       border-radius: 3px;
       display: inline-block;
       text-align: center;
-      line-height: 36px;
       color: #fff;
       border: none;
       outline: none;
@@ -276,15 +292,15 @@ export default {
       text-align: center;
       line-height: 36px;
       cursor: pointer;
-      font-size: 12px
+      font-size: 12px;
     }
     .success {
-      background: #00c356 !important;;
-      color: #fff !important;;
+      background: #00c356 !important;
+      color: #fff !important;
     }
     .error {
       background: #ff4c2d !important;
-      color: #fff !important;;
+      color: #fff !important;
     }
     .current {
       background: #efefef;

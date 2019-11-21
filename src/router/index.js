@@ -39,6 +39,18 @@ const routes = [
 
   },
   {
+    path: '/examine',//模拟考试
+    name: 'examine',
+    component: () => import('@/views/examine.vue'),
+
+  },
+  {
+    path: '/examineresult',//考试结果
+    name: 'examineresult',
+    component: () => import('@/views/examineresult.vue'),
+
+  },
+  {
     path: '/notesapplication',
     name: 'notesapplication',
     redirect: '/notesapplication/index',

@@ -12,3 +12,5 @@ export const getSubject1IdList = (params = {}) => { return axios.get(`${nonebase
 export const getSubject1Question = (params = {}) => { return axios.get(`${nonebase}/api/subject1/detail`, { params }) };
 //获取科目一试题分类
 export const getCategorylist = (params = {}) => { return axios.get(`${nonebase}/api/subject1/getCategorylist`, { params }) };
+//100道随机题
+export const getExamlist = (params = {}) => { return axios.get(`${nonebase}/api/subject1/getExamlist`, { params }) };

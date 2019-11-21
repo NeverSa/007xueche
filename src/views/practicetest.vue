@@ -34,7 +34,7 @@
               </span>
               顺序练习
             </div>
-             <div class="item" @click="answer(2)">
+             <div class="item" @click="answer(3)">
               <span style="background:#ab92ed">
                 <i class="iconfont icon-repeat"></i>
               </span>
@@ -52,7 +52,7 @@
                 <i class="iconfont icon-repeat"></i>
               </span>顺序练习
             </div>
-             <div class="item" @click="answer(2)">
+             <div class="item" @click="answer(3)">
               <span style="background:#ab92ed">
                 <i class="iconfont icon-repeat"></i>
               </span>
@@ -86,6 +86,11 @@ export default {
          this.$router.push({
         path: "/answer",
         query: { subject: this.active, type: type }
+      });
+      }else if(type==3){
+         this.$router.push({
+        path: "/examine",
+        query: { subject: this.active }
       });
       }
      
