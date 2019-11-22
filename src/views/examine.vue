@@ -117,6 +117,34 @@
         <el-button type="primary" @click="goresult()">确认交卷</el-button>
       </span>
     </el-dialog>
+
+    <el-dialog
+      title="考试结果"
+      :visible.sync="dialogResult"
+      width="30%"
+      :show-close="false"
+      :close-on-click-modal="false"
+      class="dilog_result"
+    >
+      <div class style="text-align: center;">
+        <img src="../assets/img/car.jpg" alt style="width:200px;margin:0 auto" />
+      </div>
+      <div class="designation">获得称号：{{sorce>90?'秋名山老司机':'马路杀手'}}</div>
+      <div class="detail">
+        <div :class="sorce>90?'tt':'ee'">
+          <span>分数:</span>
+          <span>{{sorce}}</span>
+        </div>
+        <div>
+          <span>耗时:</span>
+          <span>{{time}}</span>
+        </div>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="goback()">返回</el-button>
+        <el-button type="primary" @click="reseat()">重新考试</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -131,7 +159,10 @@ export default {
       qusetion: [],
       detail: {},
       index: 0,
-      dialogVisible: false
+      dialogVisible: false,
+      sorce: 0,
+      time: "",
+      dialogResult: false
     };
   },
   components: {
@@ -144,23 +175,24 @@ export default {
     this.getExamlist();
   },
   methods: {
+    goback() {
+      this.$router.push("/practicetest");
+    },
+    reseat() {
+      this.dialogResult = false;
+      this.getExamlist();
+    },
     goresult() {
-      let sorce = 0;
+      this.sorce = 0;
       this.qusetion.forEach(item => {
         if (item.select && item.select == item.answer) {
-          sorce++;
+          this.sorce++;
         }
       });
-      
-     let time=this.$refs.time.getCount();
-     console.log(time)
-      this.$router.push({
-        path: "/examineresult",
-        query: {
-          sorce: sorce,
-          time:time,
-        }
-      });
+
+      this.time = this.$refs.time.getCount();
+      this.dialogVisible = false;
+      this.dialogResult = true;
     },
     submitExamine() {
       this.dialogVisible = true;
@@ -209,6 +241,33 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.dilog_result {
+  .designation {
+    font-weight: 600;
+    color: #e6a23c;
+    padding: 10px;
+    text-align: center;
+  }
+  .detail {
+    padding: 10px 80px;
+    display: flex;
+    justify-content: space-between;
+    .ee {
+      color: #f56c6c;
+    }
+    .tt {
+      color: #67c23a;
+    }
+    div {
+      width: 50%;
+      text-align: center;
+      font-size: 26px;
+      span {
+        margin-right: 15px;
+      }
+    }
+  }
+}
 .top_bread {
   display: flex;
   align-items: center;
