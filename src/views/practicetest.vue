@@ -26,7 +26,7 @@
               <span style="background:#4ec1e8">
                 <i class="iconfont icon-zhangjielianxi"></i>
               </span>
-              专项练习
+              章节练习
             </div>
             <div class="item" @click="answer(2)">
               <span style="background:#ab92ed">

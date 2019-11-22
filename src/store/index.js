@@ -8,12 +8,28 @@ const state = {//要设置的全局访问的state对象
 };
 const mutations = {
     updatAnswer(state,arr) {
-     let has= state.answerList.findIndex((v) => {
+       if(arr.select instanceof Array){
+        let has= state.answerList.findIndex((v) => {
+            return v.id == arr.id;
+        })
+        if(has==-1){
+            state.answerList.push(arr)
+        }else{
+            state.answerList.forEach(element => {
+                if(element.id == arr.id){
+                    element.select=arr.select
+                }
+            });
+        }
+       }else{
+        let has= state.answerList.findIndex((v) => {
             return v.id == arr.id;
         })
         if(has==-1){
             state.answerList.push(arr)
         }
+       }
+     
     },
 }
 const store = new Vuex.Store({

@@ -33,21 +33,21 @@
             <div class="title_a">考试题目</div>
             <div
               class="question_title"
-            >({{detail.type==1?"判断题":"单选题"}}){{index+1}}、{{detail.question}}</div>
+            >({{detail.type==0?"判断题":"单选题"}}){{index+1}}、{{detail.question}}</div>
             <div class="answer">
               <div class="item">
                 A:
-                <label>{{detail.type==1?"正确":detail.a}}</label>
+                <label>{{detail.type==0?"正确":detail.a}}</label>
               </div>
               <div class="item">
                 B:
-                <label>{{detail.type==1?"错误":detail.b}}</label>
+                <label>{{detail.type==0?"错误":detail.b}}</label>
               </div>
-              <div class="item" v-if="detail.type==2">
+              <div class="item" v-if="detail.type==1">
                 C:
                 <label>{{detail.c}}</label>
               </div>
-              <div class="item" v-if="detail.type==2">
+              <div class="item" v-if="detail.type==1">
                 D:
                 <label>{{detail.d}}</label>
               </div>
@@ -67,13 +67,13 @@
                 >B</el-button>
                 <el-button
                   size="mini"
-                  v-if="detail.type==2"
+                  v-if="detail.type==1"
                   @click="submitAwser(3)"
                   :type="detail.select==3?'primary':''"
                 >C</el-button>
                 <el-button
                   size="mini"
-                  v-if="detail.type==2"
+                  v-if="detail.type==1"
                   @click="submitAwser(4)"
                   :type="detail.select==4?'primary':''"
                 >D</el-button>
@@ -84,7 +84,7 @@
     justify-content: space-between;">
             <div class="exam_message">
               <div class="title_a">提示</div>
-              {{detail.type==1?"判断题，请判断对错":"单选题,选择一项"}}
+              {{detail.type==0?"判断题，请判断对错":"单选题,选择一项"}}
             </div>
             <div>
               <el-button type="success" size="small" @click="changeItem(-1)">上一题</el-button>

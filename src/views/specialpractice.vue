@@ -10,11 +10,22 @@
 
     <div class="warper">
       <div class="right_warpe">
-        <span class="list" v-for="item in list" :key="item.category_id" @click="jump(item)">
-          <el-badge value="100" type="success">
-            <span class="name">{{item.category_name}}</span>
-          </el-badge>
-        </span>
+        <div class="list">
+          <span>1、道路交通安全法律、法规和规章</span>
+          <el-button  type="success" @click="jump(1)">立即开始</el-button>
+        </div>
+        <div class="list">
+          <span>2、交通信号</span>
+          <el-button  type="success"  @click="jump(2)">立即开始</el-button>
+        </div>
+        <div class="list">
+          <span>3、安全行车、文明驾驶基础知识</span>
+          <el-button  type="success"  @click="jump(3)">立即开始</el-button>
+        </div>
+        <div class="list">
+          <span>4、机动车驾驶操作相关基础知识</span>
+          <el-button type="success"  @click="jump(4)"> 立即开始</el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -26,19 +37,12 @@ export default {
       list: []
     };
   },
-  created() {
-    this.getCategorylist();
-  },
+  created() {},
   methods: {
-    jump(item) {
+    jump(category_id) {
       this.$router.push({
         path: "/answer",
-        query: { subject: 1,category_id:item.category_id }
-      });
-    },
-    getCategorylist() {
-      this.$api.getCategorylist().then(res => {
-        this.list = res.data.data;
+        query: { subject: 1, category_id: category_id }
       });
     }
   }
@@ -66,17 +70,17 @@ export default {
       background: #fff;
       border-bottom: none;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
       padding-top: 30px;
+      flex-direction: column;
       .list {
-        width: 16.6%;
-        display: inline-block;
-        text-align: left;
+        display: flex;
+        justify-content: space-between;
         margin-bottom: 30px;
         cursor: pointer;
         color: #4d4d4d;
-        font-size: 14px;
+        font-size: 20px;
+        border: 1px solid #efefef;
+        padding: 15px;
         .name {
           display: block;
           padding-right: 10px;

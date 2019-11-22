@@ -1,8 +1,8 @@
 <template>
   <div class="answer">
-    <div class="question-content">
+    <div class="question-content" v-if="subject==1">
       <div class="left">
-        <span class="round">{{detail.type==2?'单选题':'判断题'}}</span>
+        <span class="round">{{detail.type==1?'判断题':'单选题'}}</span>
       </div>
       <div class="right">
         <div class="questiopn">{{index+1}}/{{idList.length}} {{detail.question}}</div>
@@ -50,7 +50,63 @@
             </div>
           </div>
           <div class="questiopn_item_right">
-            <img :src="detail.imgurl" alt />
+            <img :src="detail.imgurl" alt style="width:200px;" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 科目四 -->
+    <div class="question-content" v-if="subject==2">
+      <div class="left">
+        <span class="round">{{detail.type==1?'单选题':detail.type==2?'多选题':"判断题"}}</span>
+      </div>
+      <div class="right">
+        <div class="questiopn">{{index+1}}/{{idList.length}} {{detail.question}}</div>
+        <div class="questiopn_item">
+          <div class="questiopn_item_left">
+            <div class="radio_list">
+              <div class="radio" @click="checkedanswer(1)" :class="getClass(1)">
+                <label for>
+                  <i class="iconfont icon-success_no_circle" v-if="getClass(1)=='success'"></i>
+                  <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(1)=='error'"></i>
+                </label>
+                <span>{{detail.a==''?'正确':detail.a}}</span>
+              </div>
+              <div class="radio" @click="checkedanswer(2)" :class="getClass(2)">
+                <label for>
+                  <i class="iconfont icon-success_no_circle" v-if="getClass(2)=='success'"></i>
+                  <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(2)=='error'"></i>
+                </label>
+                <span>{{detail.b==''?'错误':detail.b}}</span>
+              </div>
+              <div
+                class="radio"
+                @click="checkedanswer(3)"
+                :class="getClass(3)"
+                v-if="detail.type==2||detail.type==1"
+              >
+                <label for>
+                  <i class="iconfont icon-success_no_circle" v-if="getClass(3)=='success'"></i>
+                  <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(3)=='error'"></i>
+                </label>
+                <span>{{detail.c}}</span>
+              </div>
+              <div
+                v-if="detail.type==2||detail.type==1"
+                class="radio"
+                @click="checkedanswer(4)"
+                :class="getClass(4)"
+              >
+                <label for>
+                  <i class="iconfont icon-success_no_circle" v-if="getClass(4)=='success'"></i>
+                  <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(4)=='error'"></i>
+                </label>
+                <span>{{detail.d}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="questiopn_item_right">
+            <img :src="detail.imgurl" alt style="width:200px;" />
           </div>
         </div>
       </div>
@@ -59,6 +115,7 @@
       <div>
         <button @click="changeTitle(-1)">上一题</button>
         <button @click="changeTitle(1)">下一题</button>
+        <button @click="submitmulti()" v-if="detail.type==2&&subject==2">提交</button>
       </div>
       <div>
         <el-button type="success" size="small" @click="showResult=!showResult">显示解析</el-button>
@@ -90,7 +147,7 @@ export default {
       detail: {},
       radio: "",
       index: 0,
-      showResult:false
+      showResult: false
     };
   },
   computed: {
@@ -109,9 +166,7 @@ export default {
     }
   },
   created() {
-    if (this.subject == 1) {
-      this.getSubject1IdList();
-    }
+    this.getSubject1IdList();
   },
   methods: {
     getListClass(item, index) {
@@ -160,7 +215,10 @@ export default {
     //获取科目一id列表
     getSubject1IdList() {
       this.$api
-        .getSubject1IdList({ category_id: this.$route.query.category_id })
+        .getSubject1IdList({
+          category_id: this.$route.query.category_id,
+          subject_id: this.$route.query.subject
+        })
         .then(res => {
           this.idList = res.data.data;
           this.getQuestion(this.idList[0]);
@@ -168,20 +226,47 @@ export default {
     },
     //选题
     checkedanswer(an) {
-      let has = this.answerList.findIndex(v => {
-        return v.id == this.detail.id;
-      });
-      if (has == -1) {
-        this.updatAnswer(Object.assign(this.detail, { select: an }));
+      if (this.subject == 1) {
+        let has = this.answerList.findIndex(v => {
+          return v.id == this.detail.id;
+        });
+        if (has == -1) {
+          this.updatAnswer(Object.assign(this.detail, { select: an }));
+        }
+      } else if (this.subject == 2) {
+        if (this.detail.type == 1 || this.detail.type == 3) {
+          let has = this.answerList.findIndex(v => {
+            return v.id == this.detail.id;
+          });
+          if (has == -1) {
+            this.updatAnswer(Object.assign(this.detail, { select: an }));
+          }
+        } else {
+          if (!this.detail.select) {
+            this.updatAnswer(Object.assign(this.detail, { select: [an] }));
+          } else {
+            this.detail.select.push(an);
+            this.updatAnswer(
+              Object.assign(this.detail, {
+                select: [...new Set(this.detail.select)]
+              })
+            );
+          }
+        }
       }
     },
     getQuestion(item, index) {
       if (index) {
         this.index = index;
       }
-      this.$api.getSubject1Question({ id: item.id }).then(res => {
-        this.detail = res.data.data;
-      });
+      this.$api
+        .getSubject1Question({
+          id: item.id,
+          subject_id: this.$route.query.subject
+        })
+        .then(res => {
+          this.detail = res.data.data;
+        });
     }
   }
 };
