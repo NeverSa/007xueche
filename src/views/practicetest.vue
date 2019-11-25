@@ -22,19 +22,19 @@
         </div>
         <div class="contnet">
           <div class="subj_list">
-            <div class="item" @click="answer(1)"  style="border-right:none">
+            <div class="item" @click="answer(1,1)"  style="border-right:none">
               <span style="background:#4ec1e8">
                 <i class="iconfont icon-zhangjielianxi"></i>
               </span>
               章节练习
             </div>
-            <div class="item" @click="answer(2)">
+            <div class="item" @click="answer(2,1)">
               <span style="background:#ab92ed">
                 <i class="iconfont icon-repeat"></i>
               </span>
               顺序练习
             </div>
-             <div class="item" @click="answer(3)">
+             <div class="item" @click="answer(3,1)">
               <span style="background:#ab92ed">
                 <i class="iconfont icon-repeat"></i>
               </span>
@@ -42,21 +42,16 @@
             </div>
           </div>
           <div class="subj_list">
-            <div class="item" @click="answer(1)" style="border-right:none">
-              <span style="background:#4acfad">
-                <i class="iconfont icon-zhangjielianxi"></i>
-              </span>专项练习
-            </div>
-            <div class="item" @click="answer(2)">
+            <div class="item" @click="answer(2,2)">
               <span style="background:#feb354">
                 <i class="iconfont icon-repeat"></i>
               </span>顺序练习
             </div>
-             <div class="item" @click="answer(3)">
+             <div class="item" @click="answer(3,2)">
               <span style="background:#ab92ed">
                 <i class="iconfont icon-repeat"></i>
               </span>
-              考试模拟1
+              考试模拟
             </div>
           </div>
         </div>
@@ -75,22 +70,21 @@ export default {
     console.log(this.$route);
   },
   methods: {
-    answer(type) {
-      
+    answer(type,subject) {
       if(type==1){
        this.$router.push({
         path: "/specialpractice",
-        query: { subject: this.active, type: type }
+        query: { subject: subject, type: type }
       });
       }else if(type==2){
          this.$router.push({
         path: "/answer",
-        query: { subject: this.active, type: type }
+        query: { subject: subject, type: type }
       });
       }else if(type==3){
          this.$router.push({
         path: "/examine",
-        query: { subject: this.active }
+        query: { subject: subject }
       });
       }
      

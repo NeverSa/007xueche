@@ -9,41 +9,41 @@
         <div class="questiopn_item">
           <div class="questiopn_item_left">
             <div class="radio_list">
-              <div class="radio" @click="checkedanswer(1)" :class="getClass(1)">
+              <div class="radio" @click="checkedanswer(1)" :class="selectClass(1)">
                 <label for>
-                  <i class="iconfont icon-success_no_circle" v-if="getClass(1)=='success'"></i>
-                  <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(1)=='error'"></i>
+                  <i class="iconfont icon-success_no_circle" v-if="selectClass(1)=='success'"></i>
+                  <i class="iconfont icon-cuowuguanbishibai" v-if="selectClass(1)=='error'"></i>
                 </label>
                 <span>{{detail.a==''?'正确':detail.a}}</span>
               </div>
-              <div class="radio" @click="checkedanswer(2)" :class="getClass(2)">
+              <div class="radio" @click="checkedanswer(2)" :class="selectClass(2)">
                 <label for>
-                  <i class="iconfont icon-success_no_circle" v-if="getClass(2)=='success'"></i>
-                  <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(2)=='error'"></i>
+                  <i class="iconfont icon-success_no_circle" v-if="selectClass(2)=='success'"></i>
+                  <i class="iconfont icon-cuowuguanbishibai" v-if="selectClass(2)=='error'"></i>
                 </label>
                 <span>{{detail.b==''?'错误':detail.b}}</span>
               </div>
               <div
                 class="radio"
                 @click="checkedanswer(3)"
-                :class="getClass(3)"
-                v-if="detail.type==2"
+                :class="selectClass(3)"
+                v-if="detail.type==1"
               >
                 <label for>
-                  <i class="iconfont icon-success_no_circle" v-if="getClass(3)=='success'"></i>
-                  <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(3)=='error'"></i>
+                  <i class="iconfont icon-success_no_circle" v-if="selectClass(3)=='success'"></i>
+                  <i class="iconfont icon-cuowuguanbishibai" v-if="selectClass(3)=='error'"></i>
                 </label>
                 <span>{{detail.c}}</span>
               </div>
               <div
                 class="radio"
                 @click="checkedanswer(4)"
-                :class="getClass(4)"
-                v-if="detail.type==2"
+                :class="selectClass(4)"
+                v-if="detail.type==1"
               >
                 <label for>
-                  <i class="iconfont icon-success_no_circle" v-if="getClass(4)=='success'"></i>
-                  <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(4)=='error'"></i>
+                  <i class="iconfont icon-success_no_circle" v-if="selectClass(4)=='success'"></i>
+                  <i class="iconfont icon-cuowuguanbishibai" v-if="selectClass(4)=='error'"></i>
                 </label>
                 <span>{{detail.d}}</span>
               </div>
@@ -58,48 +58,48 @@
     <!-- 科目四 -->
     <div class="question-content" v-if="subject==2">
       <div class="left">
-        <span class="round">{{detail.type==1?'单选题':detail.type==2?'多选题':"判断题"}}</span>
+        <span class="round">{{detail.type==1?'单选题':detail.type==2?'判断题':"多选题"}}</span>
       </div>
       <div class="right">
         <div class="questiopn">{{index+1}}/{{idList.length}} {{detail.question}}</div>
         <div class="questiopn_item">
           <div class="questiopn_item_left">
             <div class="radio_list">
-              <div class="radio" @click="checkedanswer(1)" :class="getClass(1)">
+              <div class="radio" @click="checkedanswer(1)" :class="[getClass(1),selectClass(1)]">
                 <label for>
-                  <i class="iconfont icon-success_no_circle" v-if="getClass(1)=='success'"></i>
-                  <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(1)=='error'"></i>
+                  <i class="iconfont icon-success_no_circle" v-if="selectClass(1)=='success'"></i>
+                  <i class="iconfont icon-cuowuguanbishibai" v-if="selectClass(1)=='error'"></i>
                 </label>
                 <span>{{detail.a==''?'正确':detail.a}}</span>
               </div>
-              <div class="radio" @click="checkedanswer(2)" :class="getClass(2)">
+              <div class="radio" @click="checkedanswer(2)" :class="[getClass(2),selectClass(2)]">
                 <label for>
-                  <i class="iconfont icon-success_no_circle" v-if="getClass(2)=='success'"></i>
-                  <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(2)=='error'"></i>
+                  <i class="iconfont icon-success_no_circle" v-if="selectClass(2)=='success'"></i>
+                  <i class="iconfont icon-cuowuguanbishibai" v-if="selectClass(2)=='error'"></i>
                 </label>
                 <span>{{detail.b==''?'错误':detail.b}}</span>
               </div>
               <div
                 class="radio"
                 @click="checkedanswer(3)"
-                :class="getClass(3)"
-                v-if="detail.type==2||detail.type==1"
+                :class="[getClass(3),selectClass(3)]"
+                v-if="detail.type!==2"
               >
                 <label for>
-                  <i class="iconfont icon-success_no_circle" v-if="getClass(3)=='success'"></i>
-                  <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(3)=='error'"></i>
+                  <i class="iconfont icon-success_no_circle" v-if="selectClass(3)=='success'"></i>
+                  <i class="iconfont icon-cuowuguanbishibai" v-if="selectClass(3)=='error'"></i>
                 </label>
                 <span>{{detail.c}}</span>
               </div>
               <div
-                v-if="detail.type==2||detail.type==1"
+                v-if="detail.type!==2"
                 class="radio"
                 @click="checkedanswer(4)"
-                :class="getClass(4)"
+                :class="[getClass(4),selectClass(4)]"
               >
                 <label for>
-                  <i class="iconfont icon-success_no_circle" v-if="getClass(4)=='success'"></i>
-                  <i class="iconfont icon-cuowuguanbishibai" v-if="getClass(4)=='error'"></i>
+                  <i class="iconfont icon-success_no_circle" v-if="selectClass(4)=='success'"></i>
+                  <i class="iconfont icon-cuowuguanbishibai" v-if="selectClass(4)=='error'"></i>
                 </label>
                 <span>{{detail.d}}</span>
               </div>
@@ -115,7 +115,7 @@
       <div>
         <button @click="changeTitle(-1)">上一题</button>
         <button @click="changeTitle(1)">下一题</button>
-        <button @click="submitmulti()" v-if="detail.type==2&&subject==2">提交</button>
+        <button @click="submitmulti()" v-if="detail.type==3&&subject==2" >提交</button>
       </div>
       <div>
         <el-button type="success" size="small" @click="showResult=!showResult">显示解析</el-button>
@@ -163,12 +163,68 @@ export default {
       } else {
         return {};
       }
+    },
+    selectClass() {
+      return index => {
+        if (this.subject == 2 && this.detail.type == 3) {
+          if (this.detail.submit == undefined && this.detail.select) {
+            if (this.detail.select.includes(index)) {
+              return "select";
+            }
+          } else if (this.detail.submit == true && this.detail.select) {
+            if (
+              this.detail.answer
+                .toString()
+                .split("")
+                .includes(index.toString())
+            ) {
+              return "success";
+            } else if (!this.detail.select.includes(index.toString())) {
+              let arr = JSON.stringify(this.detail.select);
+              if (
+                JSON.parse(arr)
+                  .sort()
+                  .join("") !== this.detail.answer.toString()
+              ) {
+                return "error";
+              }
+            }
+          }
+        } else {
+          if (
+            index == this.stateAnswer.select &&
+            this.stateAnswer.select == this.detail.answer
+          ) {
+            return "success";
+          } else if (
+            index == this.stateAnswer.select &&
+            this.stateAnswer.select !== this.detail.answer
+          ) {
+            return "error";
+          } else {
+            return "";
+          }
+        }
+      };
     }
   },
   created() {
     this.getSubject1IdList();
   },
   methods: {
+    submitmulti() {
+      try {
+            if(this.detail.select&&this.detail.select.length>1){
+       this.$set(this.detail, "submit", true);
+      this.updatAnswer(Object.assign(this.detail));
+      }
+      } catch (error) {
+        console.log(error)
+      }
+    
+     
+     
+    },
     getListClass(item, index) {
       let current = "";
       if (this.index == index) {
@@ -178,10 +234,26 @@ export default {
         return item.id == key.id;
       });
       if (classarr.length > 0) {
-        if (classarr[0].answer == classarr[0].select) {
-          current = "success " + current;
+        if (classarr[0].type == 3) {
+          let arr = JSON.stringify(classarr[0].select);
+          if (!classarr[0].submit) {
+            return;
+          }
+          if (
+            JSON.parse(arr)
+              .sort()
+              .join("") == classarr[0].answer.toString()
+          ) {
+            return "success " + current;
+          } else {
+            return "error " + current;
+          }
         } else {
-          current = "error " + current;
+          if (classarr[0].answer == classarr[0].select) {
+            current = "success " + current;
+          } else {
+            current = "error " + current;
+          }
         }
       }
       return current;
@@ -196,18 +268,8 @@ export default {
       this.index = this.index + index;
       this.getQuestion(this.idList[this.index]);
     },
-    getClass(type) {
-      if (
-        type == this.stateAnswer.select &&
-        this.stateAnswer.select == this.detail.answer
-      ) {
-        return "success";
-      } else if (
-        type == this.stateAnswer.select &&
-        this.stateAnswer.select !== this.detail.answer
-      ) {
-        return "error";
-      } else {
+    getClass() {
+      if (this.detail.type == 3) {
         return "";
       }
     },
@@ -226,6 +288,9 @@ export default {
     },
     //选题
     checkedanswer(an) {
+      if (this.detail.type == 3 && this.detail.submit == true) {
+        return;
+      }
       if (this.subject == 1) {
         let has = this.answerList.findIndex(v => {
           return v.id == this.detail.id;
@@ -234,7 +299,7 @@ export default {
           this.updatAnswer(Object.assign(this.detail, { select: an }));
         }
       } else if (this.subject == 2) {
-        if (this.detail.type == 1 || this.detail.type == 3) {
+        if (this.detail.type == 1 || this.detail.type == 2) {
           let has = this.answerList.findIndex(v => {
             return v.id == this.detail.id;
           });
@@ -243,6 +308,7 @@ export default {
           }
         } else {
           if (!this.detail.select) {
+            this.$set(this.detail, "select", [an]);
             this.updatAnswer(Object.assign(this.detail, { select: [an] }));
           } else {
             this.detail.select.push(an);
@@ -259,14 +325,23 @@ export default {
       if (index) {
         this.index = index;
       }
-      this.$api
-        .getSubject1Question({
-          id: item.id,
-          subject_id: this.$route.query.subject
-        })
-        .then(res => {
-          this.detail = res.data.data;
-        });
+      let detail = this.answerList.filter(key => {
+        return (key.id == item.id);
+      });
+      if (detail.length > 0) {
+        this.detail = detail[0];
+      } else {
+         this.detail={}
+        this.$api
+          .getSubject1Question({
+            id: item.id,
+            subject_id: this.$route.query.subject
+          })
+          .then(res => {
+            this.detail = res.data.data;
+          });
+      }
+      console.log( this.detail)
     }
   }
 };
@@ -306,6 +381,12 @@ export default {
           label {
             background: #ff4c2d;
             border: 1px solid #ff4c2d;
+          }
+        }
+        .select {
+          label {
+            background: #409eff;
+            border: 1px solid #409eff;
           }
         }
         .radio {

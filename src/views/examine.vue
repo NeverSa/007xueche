@@ -20,7 +20,7 @@
             </div>
             <div class="item">姓名：001</div>
             <div class="item">考试类型：小车</div>
-            <div class="item">考试科目：科目一</div>
+            <div class="item">考试科目：{{subject==1?"科目一":"科目四"}}</div>
             <div class="title">考试信息</div>
           </div>
           <div class="time">
@@ -33,21 +33,21 @@
             <div class="title_a">考试题目</div>
             <div
               class="question_title"
-            >({{detail.type==0?"判断题":"单选题"}}){{index+1}}、{{detail.question}}</div>
+            >({{detail.type==1?"单选题":detail.type==2?"判断题":"多选题"}}){{index+1}}、{{detail.question}}</div>
             <div class="answer">
               <div class="item">
                 A:
-                <label>{{detail.type==0?"正确":detail.a}}</label>
+                <label>{{detail.type==2?"正确":detail.a}}</label>
               </div>
               <div class="item">
                 B:
-                <label>{{detail.type==0?"错误":detail.b}}</label>
+                <label>{{detail.type==2?"错误":detail.b}}</label>
               </div>
-              <div class="item" v-if="detail.type==1">
+              <div class="item" v-if="detail.type!==2">
                 C:
                 <label>{{detail.c}}</label>
               </div>
-              <div class="item" v-if="detail.type==1">
+              <div class="item" v-if="detail.type!==2">
                 D:
                 <label>{{detail.d}}</label>
               </div>
@@ -55,27 +55,19 @@
             <div class="result">
               <span>您的选项是：</span>
               <span>
+                <el-button size="mini" @click="submitAwser(1)" :type="getSelect(1)">A</el-button>
+                <el-button size="mini" @click="submitAwser(2)" :type="getSelect(2)">B</el-button>
                 <el-button
                   size="mini"
-                  @click="submitAwser(1)"
-                  :type="detail.select==1?'primary':''"
-                >A</el-button>
-                <el-button
-                  size="mini"
-                  @click="submitAwser(2)"
-                  :type="detail.select==2?'primary':''"
-                >B</el-button>
-                <el-button
-                  size="mini"
-                  v-if="detail.type==1"
+                  v-if="detail.type!==2"
                   @click="submitAwser(3)"
-                  :type="detail.select==3?'primary':''"
+                  :type="getSelect(3)"
                 >C</el-button>
                 <el-button
                   size="mini"
-                  v-if="detail.type==1"
+                  v-if="detail.type!==2"
                   @click="submitAwser(4)"
-                  :type="detail.select==4?'primary':''"
+                  :type="getSelect(4)"
                 >D</el-button>
               </span>
             </div>
@@ -84,7 +76,7 @@
     justify-content: space-between;">
             <div class="exam_message">
               <div class="title_a">提示</div>
-              {{detail.type==0?"判断题，请判断对错":"单选题,选择一项"}}
+              {{detail.type==1?"单选题,选择一项":"判断题，请判断对错"}}
             </div>
             <div>
               <el-button type="success" size="small" @click="changeItem(-1)">上一题</el-button>
@@ -99,11 +91,21 @@
           <span
             v-for="(item,myindex) in qusetion"
             :key="item.id"
-            :class="{'current':index==myindex,'success':item.answer==item.select,'error':item.answer!==item.select&&item.select!==undefined}"
+            :class="titleClass(myindex,item)"
             @click="selectItem(myindex)"
           >{{myindex+1}}</span>
         </div>
       </div>
+    </div>
+    <div
+      style="width: 1200px;
+    margin: 30px auto;
+    text-align: center;
+    
+    padding: 30px 0px;border: 1px solid #efefef;"
+    >
+      <div style="text-align: left;    padding-left: 30px;">图片信息</div>
+      <img :src="detail.imgurl" alt style="padding-top:30px;" />
     </div>
     <el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
       <div>
@@ -129,11 +131,11 @@
       <div class style="text-align: center;">
         <img src="../assets/img/car.jpg" alt style="width:200px;margin:0 auto" />
       </div>
-      <div class="designation">获得称号：{{sorce>90?'秋名山老司机':'马路杀手'}}</div>
+      <div class="designation">获得称号：{{filtersorce>90?'秋名山老司机':'马路杀手'}}</div>
       <div class="detail">
-        <div :class="sorce>90?'tt':'ee'">
+        <div :class="filtersorce>90?'tt':'ee'">
           <span>分数:</span>
-          <span>{{sorce}}</span>
+          <span>{{filtersorce}}</span>
         </div>
         <div>
           <span>耗时:</span>
@@ -174,6 +176,61 @@ export default {
     this.endTime = time.toString();
     this.getExamlist();
   },
+  computed: {
+    filtersorce(){
+        if(this.subject==2){
+            return this.sorce*2
+        }else{
+                 return this.sorce
+        }
+    },
+    getSelect() {
+      return index => {
+        if (this.detail.type == 3) {
+          if (this.detail.select && this.detail.select.includes(index)) {
+            return "primary";
+          }
+        } else {
+          if (this.detail.select == index) {
+            return "primary";
+          }
+        }
+      };
+    },
+    titleClass() {
+      return (index, item) => {
+        let classstr = " ";
+        if (this.index == index) {
+          classstr = "current ";
+        }
+        if (item.type !== 3) {
+          if (item.select && item.answer == item.select) {
+            classstr = classstr + " success";
+          } else if (item.select && item.answer !== item.select) {
+            classstr = classstr + " error";
+          }
+        } else {
+          let arr = JSON.stringify(item.select);
+          if (
+            item.submit &&
+            JSON.parse(arr)
+              .sort()
+              .join("") == item.answer.toString()
+          ) {
+            classstr = classstr + " success";
+          } else if (
+            item.submit &&
+            JSON.parse(arr)
+              .sort()
+              .join("") !== item.answer.toString()
+          ) {
+            classstr = classstr + " error";
+          }
+        }
+        return classstr;
+      };
+    }
+  },
   methods: {
     goback() {
       this.$router.push("/practicetest");
@@ -185,8 +242,20 @@ export default {
     goresult() {
       this.sorce = 0;
       this.qusetion.forEach(item => {
-        if (item.select && item.select == item.answer) {
-          this.sorce++;
+        if (item.type !== 3) {
+          if (item.select && item.select == item.answer) {
+            this.sorce++;
+          }
+        } else {
+          let arr = JSON.stringify(item.select);
+          if (
+            item.submit &&
+            JSON.parse(arr)
+              .sort()
+              .join("") == item.answer.toString()
+          ) {
+            this.sorce++;
+          }
         }
       });
 
@@ -198,16 +267,31 @@ export default {
       this.dialogVisible = true;
     },
     submitAwser(type) {
-      if (this.detail.select) {
-        return;
+      if (this.detail.type == 3) {
+        if (this.detail.submit) {
+          return;
+        }
+        if (this.detail.select) {
+          this.detail.select.push(type);
+          this.detail.select = [...new Set(this.detail.select)];
+        } else {
+          this.$set(this.detail, "select", [type]);
+        }
+      } else {
+        if (this.detail.select) {
+          return;
+        }
+        this.$set(this.detail, "select", type);
       }
-      this.$set(this.detail, "select", type);
     },
     selectItem(myindex) {
       this.index = myindex;
       this.detail = this.qusetion[this.index];
     },
     changeItem(index) {
+      if (this.detail.type == 3) {
+        this.$set(this.detail, "submit", true);
+      }
       if (this.index == 0 && index == -1) {
         return;
       }
@@ -218,7 +302,7 @@ export default {
       this.detail = this.qusetion[this.index];
     },
     getExamlist() {
-      this.$api.getExamlist().then(res => {
+      this.$api.getExamlist({ subjectId: this.subject }).then(res => {
         this.qusetion = res.data.data;
         if (this.qusetion.length) {
           this.detail = this.qusetion[0];
@@ -226,12 +310,7 @@ export default {
       });
     },
     callback() {},
-    jump(item) {
-      this.$router.push({
-        path: "/answer",
-        query: { subject: 1, category_id: item.category_id }
-      });
-    },
+
     getCategorylist() {
       this.$api.getCategorylist().then(res => {
         this.list = res.data.data;
@@ -279,7 +358,6 @@ export default {
   }
 }
 .notes {
-  height: 600px;
   text-align: left;
   .warper {
     width: 1200px;
