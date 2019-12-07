@@ -1,43 +1,5 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <div class="top_nav">
-        <div class="warp">
-          <div class="left">
-            <span>007学车服务电话:</span>
-            <span class="phone">18655190545</span>
-          </div>
-          <div class="right">
-            <span>报名</span>
-          </div>
-        </div>
-      </div>
-      <div class="main_warp">
-        <div class="log_nav">
-          <img src="./assets/img/log.png" alt class="log_img" />
-        </div>
-        <div class="memu_list">
-          <a :class="{'active':$route.path=='/index'}" @click="jump('/index')">首页</a>
-           <a :class="{'active':$route.path=='/practicetest'}" @click="jump('/practicetest')">模拟考试</a>
-          <a :class="{'active':$route.path=='/coach'}" @click="jump('/coach')">驾校</a>
-          <a :class="{'active':$route.path=='/practicecar'}" @click="jump('/practicecar')">训练场地</a>
-          <a
-            :class="{'active':$route.path=='/notesapplication'}"
-            @click="jump('/notesapplication')"
-          >报名须知</a>
-        </div>
-      </div>
-  
-    </div>
     <router-view />
-    <div class="copy_right">
-      <div>
-        <img src="./assets/img/log.png" alt class="bottom_log" />
-      </div>
-
-      <a href="http://beian.miit.gov.cn/" target="_blank">浙ICP备09002072号-3</a>
-    </div>
-  </div>
 </template>
 <script>
 export default {
@@ -85,9 +47,15 @@ html {
     width: 200px;
   }
 }
-#nav{
- border-bottom: 1px solid #00c356;
- padding-bottom: 15px;
+.copy_right_list {
+  padding: 20px;
+  a {
+    padding: 10px;
+  }
+}
+#nav {
+  border-bottom: 1px solid #00c356;
+  padding-bottom: 15px;
 }
 .top_nav {
   background: #f9f9f9;
@@ -103,11 +71,13 @@ html {
     .phone {
       color: @tex-color;
       margin-left: 15px;
+      
     }
     .right {
       span {
         color: @tex-color;
         cursor: pointer;
+        padding: 0px  10px;
       }
     }
   }

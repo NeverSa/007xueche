@@ -14,3 +14,11 @@ export const getSubject1Question = (params = {}) => { return axios.get(`${noneba
 export const getCategorylist = (params = {}) => { return axios.get(`${nonebase}/api/subject1/getCategorylist`, { params }) };
 //100道随机题
 export const getExamlist = (params = {}) => { return axios.get(`${nonebase}/api/subject1/getExamlist`, { params }) };
+//短信验证码
+export const sendSms = (params = {}) => { return axios.post(`${base}/api/front/send/sms`, params ) };
+//前台注册
+export const register = (params = {}) => { return axios.post(`${base}/api/front/register`, params ) };
+//登录
+export const login = (params = {}) => { return axios.post(`${base}/api/front/login`, params ) };
+//用户信息
+export const userInfo = (params = {}) => { return axios.get(`${base}/api/front/user/info`, {params} ) };

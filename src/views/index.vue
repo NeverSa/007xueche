@@ -18,7 +18,7 @@
           <el-select
             v-model="user.type"
             placeholder="请选择驾考类型"
-            style="width:405px;padding-bottom:20px;margin:0 auto"
+            style="width:610px;padding-bottom:20px;margin:0 auto"
           >
             <el-option label="C1" value="1"></el-option>
             <el-option label="C2" value="2"></el-option>
@@ -136,6 +136,33 @@
         <logincom></logincom>
       </el-dialog>
     </div>
+
+    <div id="rightArrow" @click="tagleStatus=!tagleStatus" :class="{'tagactive_option':tagleStatus==true}">
+      <a href="javascript:;" title="���߿ͻ�"></a>
+    </div>
+    <div id="floatDivBoxs" :class="{'tagactive':tagleStatus==true}">
+      <div class="floatDtt">在线客服</div>
+      <div class="floatShadow">
+        <ul class="floatDqq">
+          <li style="padding-left:0px;">
+            <a target="_blank" href="tencent://message/?uin=1044170311&Site=sc.chinaz.com&Menu=yes">
+              <img src="../assets/img/qq.png" align="absmiddle" />&nbsp;&nbsp;在线客服1号
+            </a>
+          </li>
+          <li style="padding-left:0px;">
+            <a target="_blank" href="tencent://message/?uin=1044170311&Site=sc.chinaz.com&Menu=yes">
+              <img src="../assets/img/qq.png" align="absmiddle" />&nbsp;&nbsp;在线客服2号
+            </a>
+          </li>
+          <li style="padding-left:0px;">
+            <a target="_blank" href="tencent://message/?uin=1044170311&Site=sc.chinaz.com&Menu=yes">
+              <img src="../assets/img/qq.png" align="absmiddle" />&nbsp;&nbsp;在线客服3号
+            </a>
+          </li>
+        </ul>
+       
+      </div>
+    </div>
   </div>
 </template>
 
@@ -146,6 +173,7 @@ import banner from "@/components/banner";
 export default {
   data() {
     return {
+      tagleStatus:false,
       dialogVisible: false,
       user: {},
       newsList: [],
@@ -248,6 +276,23 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.tagactive{
+  right: -175px !important;
+}
+.tagactive_option{
+right: 0px !important;
+}
+#floatDivBoxs{width:170px;background:#fff;position:fixed;top:180px;right:0;z-index:999;}
+#floatDivBoxs .floatDtt{width:100%;height:45px;line-height:45px; background:#f08326;color:#fff;font-size:18px;text-indent:22px;position:relative;}
+#floatDivBoxs .floatDqq{padding:0 14px;margin: 0px}
+#floatDivBoxs .floatDqq li{height:45px;line-height:45px;font-size:15px;border-bottom:1px solid #e3e3e3; padding:0 0 0 50px;}
+#floatDivBoxs .floatDtxt{font-size:18px;color:#333;padding:12px 14px;}
+#floatDivBoxs .floatDtel{padding:0 0 15px 10px;}
+#floatDivBoxs .floatDtel img{display:block;}
+#floatDivBoxs .floatDbg{width:100%;height:20px;background:url(../assets/img/online_botbg.jpg) no-repeat;box-shadow:-2px 0 3px rgba(0,0,0,0.25);}
+.floatShadow{ background:#fff;box-shadow:-2px 0 3px rgba(0,0,0,0.25);}
+#rightArrow{width:50px;height:45px;background:url(../assets/img/online_arrow.jpg) no-repeat;position:fixed;top:180px;right:170px;z-index:999;}
+#rightArrow a{display:block;height:45px;}
 ul {
   list-style: none;
 }
@@ -276,7 +321,7 @@ ul {
     text-align: center;
   }
   input {
-    width: 388px;
+    width: 600px;
     height: 38px;
     padding-left: 10px;
     display: block;
