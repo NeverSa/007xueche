@@ -1,13 +1,13 @@
 <template>
   <div class="personalcenter">
-    <div class>asdd</div>
     <div class="warper">
       <div class="left_warper">
         <ul class="left_nav">
-          <li>我的个人中心</li>
-          <li>我的邀请</li>
-          <li>体现记录</li>
-          <li>绑定账号</li>
+          <li @click="jump('/personalcenter/index')">我的个人中心</li>
+          <li @click="jump('/personalcenter/invitation')">我的邀请</li>
+          <li @click="jump('/personalcenter/recordslist')">提现记录</li>
+          <li @click="jump('/personalcenter/accountbinding')">绑定账号</li>
+          <li @click="jump('/personalcenter/setpassword')">密码设置</li>
         </ul>
       </div>
       <div class="right_warper">
@@ -16,6 +16,16 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  methods:{
+    jump(url){
+      this.$router.push(url)
+    },
+    
+  }
+}
+</script>
 <style lang="less" scoped>
 .personalcenter {
   background: #f9f9f9;

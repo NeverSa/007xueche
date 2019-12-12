@@ -5,6 +5,7 @@ import * as getters from './getters'
 Vue.use(Vuex);
 const state = {//要设置的全局访问的state对象
     answerList: [],
+    user:{},
 };
 const mutations = {
     updatAnswer(state,arr) {
@@ -30,6 +31,10 @@ const mutations = {
         }
        }
      
+    },
+    updatUser(state,user){
+        debugger
+        state.user= user
     },
 }
 const store = new Vuex.Store({

@@ -37,6 +37,8 @@
   </div>
 </template>
 <script>
+import axios from 'axios';
+import {  mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -62,6 +64,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["updatUser"]),
     //发生验证码
     sendSms() {
       if (this.ruleForm.phone == "") {
@@ -96,7 +99,10 @@ export default {
                 if(res.data.success){
                     this.$message.success("登录成功");
                     this.$router.push("/personalcenter");
-                    localStorage.setItem("token",res.data.data.token)
+                    localStorage.setItem("token",res.data.data.token);
+                axios.defaults.headers['token'] = res.data.data.token;
+                sessionStorage.setItem("user",JSON.stringify(res.data.data))
+                this.updatUser(res.data.data)
                 }else{
                     this.$message.error(res.data.message);
                 }

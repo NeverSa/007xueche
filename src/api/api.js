@@ -1,4 +1,7 @@
 import axios from 'axios';
+if(localStorage.getItem("token")){
+    axios.defaults.headers['token'] = localStorage.getItem("token");
+}
 let base = "http://39.98.132.23";
 let nonebase = "http://127.0.0.1:7001";
 //数据库类型对应的服务器数查询
@@ -22,3 +25,13 @@ export const register = (params = {}) => { return axios.post(`${base}/api/front/
 export const login = (params = {}) => { return axios.post(`${base}/api/front/login`, params ) };
 //用户信息
 export const userInfo = (params = {}) => { return axios.get(`${base}/api/front/user/info`, {params} ) };
+//邀请记录
+export const inviteRecord = (params = {}) => { return axios.post(`${base}/api/front/user/invite/record`, params ) };
+//体现记录
+export const withdrawRecord = (params = {}) => { return axios.post(`${base}/api/front/user/withdraw/record`, params ) };
+//绑定账号
+export const bindAccount = (params = {}) => { return axios.post(`${base}/api/front/user/bind/account`, params ) };
+//设置密码
+export const setPassword = (params = {}) => { return axios.get(`${base}/api/front/user/set/password`, {params} ) };
+//提现
+export const withdraw = (params = {}) => { return axios.get(`${base}/api/front/user/withdraw`, {params} ) };

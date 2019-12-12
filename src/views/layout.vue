@@ -9,7 +9,8 @@
           </div>
           <div class="right">
             <span @click="jump('/regist')">注册</span>
-            <span @click="jump('/login')">登录</span>
+            <span @click="jump('/login')" v-if="!user.phone">登录</span>
+            <span  v-if="user.phone">{{user.phone}}</span>
           </div>
         </div>
       </div>
@@ -26,6 +27,10 @@
             :class="{'active':$route.path=='/notesapplication'}"
             @click="jump('/notesapplication')"
           >报名须知</a>
+          <a
+            :class="{'active':$route.path=='/personalcenter'}"
+            @click="jump('/personalcenter')"
+          >个人中心</a>
         </div>
       </div>
     </div>
@@ -51,6 +56,7 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -67,6 +73,9 @@ export default {
     }
   },
   computed: {
+     ...mapState({
+      user: "user"
+    }),
     swiper() {
       return this.$refs.mySwiper.swiper;
     }

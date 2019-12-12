@@ -28,6 +28,22 @@ const routes = [
             path: "index",//个人中心首页
             component: () => import('@/views/personalcenter/index.vue'),
           },
+          {
+            path: "invitation",//邀请
+            component: () => import('@/views/personalcenter/invitation.vue'),
+          },
+          {
+            path: "accountbinding",//账号绑定
+            component: () => import('@/views/personalcenter/accountbinding.vue'),
+          },
+          {
+            path: "recordslist",//体现记录
+            component: () => import('@/views/personalcenter/recordslist.vue'),
+          },
+          {
+            path: "setpassword",//设置密码
+            component: () => import('@/views/personalcenter/setpassword.vue'),
+          },
         ]
 
       },
