@@ -2,7 +2,7 @@ import axios from 'axios';
 if(localStorage.getItem("token")){
     axios.defaults.headers['token'] = localStorage.getItem("token");
 }
-let base = "http://39.98.132.23";
+let base = "https://www.007xueche.cn";
 let nonebase = "http://127.0.0.1:7001";
 //数据库类型对应的服务器数查询
 export const saveApply = (params = {}) => { return axios.post(`${base}/api/front/apply`, params) };

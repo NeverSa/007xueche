@@ -39,7 +39,6 @@ html {
 }
 .copy_right {
   background: #f9f9f9;
-  padding: 20px 0px;
   a {
     color: #999;
   }
@@ -53,10 +52,7 @@ html {
     padding: 10px;
   }
 }
-#nav {
-  border-bottom: 1px solid #00c356;
-  padding-bottom: 15px;
-}
+
 .top_nav {
   background: #f9f9f9;
   padding: 10px;
@@ -88,9 +84,7 @@ html {
 }
 .log_nav {
   text-align: left;
-  .log_img {
-    width: 200px;
-  }
+ 
 }
 .memu_list {
   display: flex;

@@ -5,53 +5,77 @@
         <div class="warp">
           <div class="left">
             <span>007学车服务电话:</span>
-            <span class="phone">18655190545</span>
-          </div>
-          <div class="right">
-            <span @click="jump('/regist')">注册</span>
-            <span @click="jump('/login')" v-if="!user.phone">登录</span>
-            <span  v-if="user.phone">{{user.phone}}</span>
+            <span class="phone">13857199900</span>
           </div>
         </div>
       </div>
       <div class="main_warp">
         <div class="log_nav">
-          <img src="../assets/img/log.png" alt class="log_img" />
-        </div>
-        <div class="memu_list">
-          <a :class="{'active':$route.path=='/index'}" @click="jump('/index')">首页</a>
-          <a :class="{'active':$route.path=='/practicetest'}" @click="jump('/practicetest')">模拟考试</a>
-          <a :class="{'active':$route.path=='/coach'}" @click="jump('/coach')">驾校</a>
-          <a :class="{'active':$route.path=='/practicecar'}" @click="jump('/practicecar')">训练场地</a>
-          <a
-            :class="{'active':$route.path=='/notesapplication'}"
-            @click="jump('/notesapplication')"
-          >报名须知</a>
-          <a
-            :class="{'active':$route.path=='/personalcenter'}"
-            @click="jump('/personalcenter')"
-          >个人中心</a>
+          <div class="left">
+            <img src="../assets/img/log.png" alt class="log_img" />
+            <div class="memu_list">
+              <a :class="{'active':$route.path=='/index'}" @click="jump('/index')">
+                <span>首页</span>
+              </a>
+              <a :class="{'active':$route.path=='/practicetest'}" @click="jump('/practicetest')">
+                <span>模拟考试</span>
+              </a>
+              <a :class="{'active':$route.path=='/coach'}" @click="jump('/coach')">
+                <span>驾校</span>
+              </a>
+              <a :class="{'active':$route.path=='/practicecar'}" @click="jump('/practicecar')">
+                <span>训练场地</span>
+              </a>
+              <a
+                :class="{'active':$route.path=='/notesapplication'}"
+                @click="jump('/notesapplication')"
+              >
+                <span>报名须知</span>
+              </a>
+              <a
+                :class="{'active':$route.path=='/personalcenter'}"
+                @click="jump('/personalcenter')"
+              >
+                <span>个人中心</span>
+              </a>
+            </div>
+          </div>
+          <div class="right">
+            <span @click="jump('/regist')">注册</span>
+            <span @click="jump('/login')" v-if="!user.phone">登录</span>
+            <span v-if="user.phone">{{user.phone}}</span>
+          </div>
         </div>
       </div>
     </div>
     <router-view />
     <div class="copy_right">
-      <div>
-        <img src="../assets/img/log.png" alt class="bottom_log" />
+      <div class="copy_right_warper">
+        <div style="display: flex;align-items: center;">
+          <img src="../assets/img/log.png" alt class="bottom_log" />
+        </div>
+        <div class="copy_right_list">
+          <div class="item">
+            <a href="http://115.238.28.138:8023/" target="_blank">模拟预约</a>
+            <a href="http://hz.5u5u5u5u.com/" target="_blank">理论在线学习</a>
+            <a href="http://beian.miit.gov.cn/" target="_blank">结业鉴定预约</a>
+          </div>
+          <div class="item">
+            <a href="http://hgh.122.gov.cn/" target="_blank">科目一考试预约</a>
+            <a href="http://syjy.5u5u5u5u.com" target="_blank">站岗预约</a>
+            <a href="http://beian.miit.gov.cn/" target="_blank">模拟培训预约</a>
+          </div>
+          <div class="item">
+            <a href="http://beian.miit.gov.cn/" target="_blank">试车培训预约</a>
+            <a href="http://beian.miit.gov.cn/" target="_blank">科二/科三考试预约</a>
+            <a href="http://beian.miit.gov.cn/" target="_blank">科四考试预约</a>
+          </div>
+        </div>
       </div>
-      <div class="copy_right_list">
-        <a href="http://beian.miit.gov.cn/" target="_blank">网络理论学习</a>
-        <a href="http://beian.miit.gov.cn/" target="_blank">面授培训续约</a>
-        <a href="http://beian.miit.gov.cn/" target="_blank">结业鉴定预约</a>
-        <a href="http://beian.miit.gov.cn/" target="_blank">科目一考试预约</a>
-        <a href="http://beian.miit.gov.cn/" target="_blank">站岗预约</a>
-        <a href="http://beian.miit.gov.cn/" target="_blank">模拟培训预约</a>
-        <a href="http://beian.miit.gov.cn/" target="_blank">试车培训预约</a>
-        <a href="http://beian.miit.gov.cn/" target="_blank">科二/科三考试预约</a>
-        <a href="http://beian.miit.gov.cn/" target="_blank">科四考试预约</a>
-      </div>
+    <div class="icp ">
+         版权所用©杭州铭瑄信息技术有限公司  <a href="http://www.beian.miit.gov.cn" target="_blank"> 浙ICP备19050396号</a>
+    </div>
 
-      <a href="http://beian.miit.gov.cn/" target="_blank">浙ICP备19050396</a>
     </div>
   </div>
 </template>
@@ -73,7 +97,7 @@ export default {
     }
   },
   computed: {
-     ...mapState({
+    ...mapState({
       user: "user"
     }),
     swiper() {
@@ -97,27 +121,46 @@ html {
 }
 .copy_right {
   background: #f9f9f9;
-  padding: 20px 0px;
+padding-bottom: 35px;
+.icp{
+  text-align: right;
+  color: #7D7D7D;
+  font-size: 12px;
+  width: 1200px;
+  margin: 0 auto;
+}
+  .copy_right_warper {
+    display: flex;
+    margin: 0 auto;
+    width: 1019px;
+    .copy_right_list {
+      padding: 20px;
+      display: flex;
+          flex: 1;
+      .item{  
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+text-align: left;
+    }
+      a {
+        padding: 10px;
+      }
+    }
+  }
   a {
-    color: #999;
+    color: #000000;
+    font-size: 14px;
+    text-decoration: none;
   }
   .bottom_log {
     width: 200px;
   }
 }
-.copy_right_list {
-  padding: 20px;
-  a {
-    padding: 10px;
-  }
-}
-#nav {
-  border-bottom: 1px solid #00c356;
-  padding-bottom: 15px;
-}
+
 .top_nav {
-  background: #f9f9f9;
-  padding: 10px;
+  background: rgba(249, 249, 249, 1);
+  padding: 11px;
   .warp {
     display: flex;
     justify-content: space-between;
@@ -125,17 +168,16 @@ html {
     margin: 0 auto;
     width: 1230px;
     font-size: 14px;
-    color: #999;
+    color: #2a2828;
     .phone {
-      color: @tex-color;
+      color: #9bca64;
       margin-left: 15px;
-      
     }
     .right {
       span {
         color: @tex-color;
         cursor: pointer;
-        padding: 0px  10px;
+        padding: 0px 10px;
       }
     }
   }
@@ -146,20 +188,53 @@ html {
 }
 .log_nav {
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  height: 80px;
+  .left {
+    display: flex;
+  }
   .log_img {
-    width: 200px;
+    height: 80px;
+  }
+  .right {
+    font-size: 14px;
+    color: #2a2828;
+    span + span {
+      margin-left: 18px;
+      cursor: pointer;
+    }
   }
 }
 .memu_list {
   display: flex;
   a {
-    padding: 20px 48px;
-    color: @gray-color;
+    padding: 0px 28px;
+    color: #acb1b7;
     font-size: 16px;
     cursor: pointer;
+    line-height: 80px;
   }
   .active {
-    color: @tex-color;
+    color: #9bca64;
+    font-weight: bold;
+    span {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      &::before {
+        position: absolute;
+        display: block;
+        content: "";
+        width: 100%;
+        height: 3px;
+        background: #9bca64;
+        bottom: 0px;
+      }
+    }
   }
 }
 </style>
