@@ -2,10 +2,6 @@
   <div class="notes">
     <div class="warper">
       <div class="left_warpe">
-        <div class="title">
-          <i class="iconfont icon-cheliangzhihui"></i>
-          <div>报名须知</div>
-        </div>
         <div
           class="list"
           :class="{'active':$route.path=='/notesapplication/index'}"
@@ -45,7 +41,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .notes {
-  background: #f2f2f2;
+  background: #fff;
   .warper {
     width: 1200px;
     margin: 0 auto;
@@ -54,33 +50,29 @@ export default {
       width: 200px;
       background: #fff;
       margin-right: 50px;
-      .title {
-        padding: 20px 0px;
-        i {
-          font-size: 35px;
-        }
-        font-size: 20px;
-        background: #00c356;
-        color: #fff;
-      }
+      padding-top:80px;
       .list {
-        border-bottom: 1px solid #efefef;
-        padding: 20px 0px;
-        color: #333;
-        font-size: 18px;
+        padding: 10px 10px;
+        color: #ACB1B7;
+        font-size:20px;
         font-weight: bold;
         cursor: pointer;
         position: relative;
+        text-align: left;
       }
       .active {
+        color: #9BCA64;
         &:after {
-          display: block;
-          content: "";
-          width: 4px;
-          height: 100%;
-          position: absolute;
-          background: #00c356;
-          top: 0px;
+             position: absolute;
+            display: block;
+            content: "";
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-top-color: #9BCA64;
+            left: 0px;
+            top: 32%;
+            transform: rotate(-90deg) translateY(-59%);
         }
       }
     }

@@ -93,6 +93,7 @@ export default {
   margin: 0 auto;
   flex-wrap: wrap;
   background: #fff;
+  padding-bottom: 110px;
   .title {
     width: 100%;
     padding: 34px 0 14px;
@@ -124,7 +125,8 @@ export default {
       }
     }
     .current{
-      border-left: 3px solid #00C356;
+      border-left: 8px solid #97C562;
+    background:rgba(151,197,98,0.1);
     }
   }
 }

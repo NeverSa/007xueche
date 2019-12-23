@@ -9,7 +9,8 @@
           </div>
         </div>
       </div>
-      <div class="main_warp">
+      <div class="shadow_box">
+ <div class="main_warp">
         <div class="log_nav">
           <div class="left">
             <img src="../assets/img/log.png" alt class="log_img" />
@@ -47,6 +48,8 @@
           </div>
         </div>
       </div>
+      </div>
+     
     </div>
     <router-view />
     <div class="copy_right">
@@ -118,6 +121,10 @@ html {
   margin: 0;
   padding: 0;
   font-family: "Microsoft YaHei", sans-serif;
+}
+.shadow_box{
+  box-shadow:0px 3px 16px rgba(0,0,0,0.06);
+  border:1px solid rgba(220,220,220,1);
 }
 .copy_right {
   background: #f9f9f9;

@@ -1,16 +1,43 @@
 <template>
   <div class="notes">
-    <div class="top_bread" >
-     <span style="margin-top:-3px;">位置：</span> 
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item >模拟考试</el-breadcrumb-item>
-        <el-breadcrumb-item>{{active==1?'科目一':'科目四'}}</el-breadcrumb-item>
-       
-      </el-breadcrumb>
-    </div>
-
     <div class="warper">
-      <div class="right_warpe">
+      <div class="subject">
+        <div class="item">
+          <div class="title">
+            科目一  <span>（交规）</span>
+          </div>
+          <div class="warper">
+              <div class="subject_list" @click="answer(1,1)"  style="border-right:none">
+              <img src="../assets/img/subject_1.png" alt="">
+              章节练习
+            </div>
+            <div class="subject_list" @click="answer(2,1)">
+              <img src="../assets/img/subject_2.png" alt="">
+              顺序练习
+            </div>
+             <div class="subject_list" @click="answer(3,1)">
+               <img src="../assets/img/subject_3.png" alt="">
+              考试模拟
+            </div>
+          </div>
+        </div>
+         <div class="item">
+            <div class="title">
+            科目四  <span>（安全文明驾驶）</span>
+          </div>
+             <div class="warper">
+            <div class="subject_list" @click="answer(2,2)">
+              <img src="../assets/img/subject_2.png" alt="">
+              顺序练习
+            </div>
+             <div class="subject_list" @click="answer(3,2)">
+               <img src="../assets/img/subject_3.png" alt="">
+              考试模拟
+            </div>
+          </div>
+         </div>
+      </div>
+      <!-- <div class="right_warpe">
         <div class="title">
           <div class="item" :class="{'active':active==1}" @click="active=1">科目一（交规）</div>
           <div
@@ -22,24 +49,7 @@
         </div>
         <div class="contnet">
           <div class="subj_list">
-            <div class="item" @click="answer(1,1)"  style="border-right:none">
-              <span style="background:#4ec1e8">
-                <i class="iconfont icon-zhangjielianxi"></i>
-              </span>
-              章节练习
-            </div>
-            <div class="item" @click="answer(2,1)">
-              <span style="background:#ab92ed">
-                <i class="iconfont icon-repeat"></i>
-              </span>
-              顺序练习
-            </div>
-             <div class="item" @click="answer(3,1)">
-              <span style="background:#ab92ed">
-                <i class="iconfont icon-repeat"></i>
-              </span>
-              考试模拟
-            </div>
+          
           </div>
           <div class="subj_list">
             <div class="item" @click="answer(2,2)">
@@ -55,7 +65,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -104,8 +114,47 @@ width:1200px;margin:0 auto;padding:30px 0px 15px 0px;
   font-size: 16px;
 }
 }
+.subject_list{
+  display: flex;
+  color: #2A2828;
+  font-size: 14px;
+  font-weight: bold;
+      align-items: center;
+ width: 200px;
+ cursor: pointer;
+}
 .notes {
   height: 600px;
+  .subject{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    margin-top:52px;
+    .item{
+      width:790px;
+    height:155px;
+    background:rgba(242,246,249,1);
+    border-radius:20px;
+    box-sizing: border-box;
+    padding: 20px 30px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .title{
+      font-size: 20px;
+      color: #2A2828;
+      font-weight:bold;
+      span{
+        color: #ACB1B7;
+        font-weight: normal;
+        font-size: 16px;
+      }
+    }
+    }
+  }
   .warper {
     width: 1200px;
     margin: 0 auto;

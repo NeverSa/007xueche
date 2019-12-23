@@ -3,7 +3,7 @@
     <div class="warper">
       <div class="scree">
         <div style=" display: flex;">
-          <div class="label">按区域：</div>
+          <div class="label">全部区域</div>
           <div class="search_list">
             <span
               v-for="item in areList"
@@ -21,10 +21,11 @@
               </div>
               <div class="center">
                 <span class="school_name">{{item.schoolName}}</span>
-                <span class="location">驾校地址：{{item.location}}</span>
-                <span>
+                 <span>
                   <el-rate v-model="item.score" disabled></el-rate>
                 </span>
+                <span class="location"><img src="../assets/img/dingwei.png" alt=""> 驾校地址：{{item.location}}</span>
+               
               </div>
             </div>
 
@@ -51,7 +52,7 @@
             <el-select
               v-model="user.type"
               placeholder="请选择驾考类型"
-              style="width:405px;padding-bottom:20px;margin:0 auto"
+              style="width:100%;padding-bottom:20px;margin:0 auto"
             >
               <el-option label="C1" value="1"></el-option>
               <el-option label="C2" value="2"></el-option>
@@ -123,7 +124,7 @@ export default {
       this.querySchool()
     },
     querySchool() {
-      this.$api.querySchool({ page: this.page }).then(res => {
+      this.$api.querySchool({ page: this.page,size:5 }).then(res => {
         this.coach_list = res.data.data;
       });
     },
@@ -158,7 +159,7 @@ export default {
 <style lang="less" scoped>
 .coach {
   text-align: left;
-  background: #f7f9fa;
+  background: #fff;
   .warper {
     width: 1200px;
     margin: 0 auto;
@@ -171,26 +172,40 @@ export default {
       box-sizing: border-box;
 
       .label {
-        width: 118px;
+        padding: 5px 10px;
+        background: #9bca64;
+        border-radius: 13px;
+        color: #fff;
+        font-size: 12px;
+        height: 28px;
+        width: 86px;
+        text-align: center;
+        box-sizing: border-box;
       }
       .search_list {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
         span {
-          color: #999;
+          color: #5B5B5B;
           font-size: 14px;
-          line-height: 21px;
-          margin-right: 20px;
           cursor: pointer;
+          border:1px solid rgba(194,194,194,1);
+        font-size: 12px;
+        border-radius:13px;
+          padding: 5px 15px;
+          margin-left: 15px;
+          margin-bottom: 5px;
+          height: 28px;
+          box-sizing: border-box;
         }
         .active {
           color: #00c356;
+            border:1px solid #00c356;
         }
       }
     }
     .coach_list {
-      border-top: 1px solid #efefef;
       margin-top: 30px;
       padding-top: 30px;
       .item {
@@ -200,34 +215,51 @@ export default {
         .center {
           display: flex;
           flex-direction: column;
-          margin-left: 15px;
+          margin-left:40px;
+          justify-content: space-between;
           .school_name {
+            font-size:22px;
+            font-weight:bold;
+            color: #333631;
+            padding-top: 30px;
           }
           .location {
-            font-size: 14px;
-            color: #666;
+            font-size: 18px;
+            color: #ACB4B9;
             margin: 15px 0px;
+            display: flex;
+            align-items: center;
+            img{
+              margin-right: 8px;
+            }
           }
         }
         .money {
-          font-size: 18px;
+          font-size: 22px;
           font-weight: 700;
-          color: #ffa630;
+          color: #FB560A;
           align-items: center;
           display: flex;
         }
       }
     }
     .right_warp {
-      flex: 1;
+      width: 400px;
+      box-sizing: border-box;
       margin-left: 30px;
-      background: #fff;
+      background:rgba(255,255,255,1);
+    box-shadow:0px 3px 20px rgba(0,0,0,0.06);
+    border-radius:20px;
+    margin-top:30px;
+    padding: 0px  40px;
+  height: 420px;
       .title {
+        color: #2A2828;
+        font-size:22px;
         text-align: center;
-        padding: 10px 0px;
+        padding: 30px 0px;
       }
       .tab-content-each {
-        padding: 0px 20px;
         .pop-title {
           height: 88px;
           line-height: 88px;
@@ -236,23 +268,22 @@ export default {
           text-align: center;
         }
         input {
-          width: 388px;
+          width: 318px;
           height: 38px;
           padding-left: 10px;
           display: block;
           margin: 0 auto;
           -webkit-appearance: none;
           -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-          border: 1px solid #eeeeee;
-          border-radius: 3px;
+       border:1px solid rgba(220,223,230,1);
+          border-radius: 4px;
           outline: none;
           margin-bottom: 20px;
           font-family: inherit;
         }
         .pop-btn {
-          width: 390px;
+        width: 100%;
           height: 40px;
-          background: #00c356;
           margin: 0 auto;
           color: #fff;
           border-radius: 3px;
@@ -260,6 +291,9 @@ export default {
           line-height: 40px;
           cursor: pointer;
           font-size: 12px;
+          background:rgba(155,202,100,1);
+      box-shadow:5px 5px 20px rgba(155,202,100,0.3);
+      border-radius:4px;
         }
       }
     }
