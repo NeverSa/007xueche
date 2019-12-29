@@ -4,8 +4,8 @@
       <!-- slides -->
       <swiper-slide>
         <img
-          src="../assets/img/banner.png"
-          style="height:363px;width:100%"
+          src="http://qiniu.web-resource.goxueche.com/banner.png"
+          style="height:528px;width:100%"
           alt
         />
       </swiper-slide>

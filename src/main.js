@@ -7,6 +7,7 @@ import 'swiper/dist/css/swiper.css'
 Vue.prototype.$api=api;
 Vue.use(VueAwesomeSwiper, /* { default global options } */)
 import store from './store'
+import "@/assets/css/comm.less"
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);

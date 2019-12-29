@@ -1,21 +1,68 @@
 <template>
   <div>
     <banner></banner>
+    <div class="regist_nav">
+      <input type="text" placeholder="请输入您的手机号" v-model="simbal_phone">
+      <button @click="submitUser1">我要报名</button>
+    </div>
+     <div style="height:40px">
+              <vue-seamless-scroll
+                :data="newsList"
+                :class-option="optionLeft"
+                class="seamless-warp2"
+              >
+                <ul class="item">
+                  <li v-for="item in newsList" :key="item">{{item}}报名成功</li>
+                </ul>
+              </vue-seamless-scroll>
+            </div>
+    <div class="fixed_left">
+      <div class="item">
+        <el-input v-model="user.nickName" placeholder="请填写您的姓名"></el-input>
+      </div>
+      <div class="item">
+        <el-input v-model="user.phone" placeholder="请填写您的手机号"></el-input>
+      </div>
+      <div class="item">
+           <el-input v-model="user.location" placeholder="意向学车地址"></el-input>
+      </div>
+      <div class="item">
+        <div
+          class="pop-tel"
+          style="display:flex;align-items: center;
+            justify-content: cente"
+        >
+          <el-select
+            v-model="user.type"
+            placeholder="请选择驾考类型"
+            style="width:610px;padding-bottom:20px;margin:0 auto"
+          >
+            <el-option label="C1" value="1"></el-option>
+            <el-option label="C2" value="2"></el-option>
+          </el-select>
+        </div>
+      </div>
+      <div class="bottom-text">留下您的联系方式，不久后会收到来电</div>
+          <div class="pop-btn" @click="submitUser">提交</div>
+    </div>
     <div class="regist">
-      <div class="tab-content-each">
+      <!-- <div class="tab-content-each">
         <div class="tab_warper">
           <div class="pop-title">报名咨询</div>
           <div class="pop-name">
-            <input type="text" placeholder="请填写您的姓名" v-model="user.nickName" />
+            <input type="text" placeholder="请填写您的姓名" v-model="user.nickName">
           </div>
           <div class="pop-tel">
-            <input type="text" placeholder="请填写您的手机号" v-model="user.phone" />
+            <input type="text" placeholder="请填写您的手机号" v-model="user.phone">
           </div>
           <div class="pop-tel">
-            <input type="text" placeholder="意向学车地址" v-model="user.location" />
+            <input type="text" placeholder="意向学车地址" v-model="user.location">
           </div>
-          <div class="pop-tel" style="display:flex;align-items: center;
-    justify-content: cente">
+          <div
+            class="pop-tel"
+            style="display:flex;align-items: center;
+            justify-content: cente"
+          >
             <el-select
               v-model="user.type"
               placeholder="请选择驾考类型"
@@ -28,12 +75,14 @@
           <div class="bottom-text">留下您的联系方式，不久后会收到来电</div>
           <div class="pop-btn" @click="submitUser">提交</div>
         </div>
-      </div>
-      <div
+      </div>-->
+
+      <!-- <div
         class="card_warper card_warper_title"
         style="padding-right: 600px;
       margin-top:100px;
-    box-sizing: border-box;"
+      padding-bottom:50px;
+          box-sizing: border-box;"
       >
         <el-divider content-position="left">
           <span style="font-size:38px;font-weight:bold;color:rgba(42,40,40,1);">热门报考</span>
@@ -43,10 +92,10 @@
         <div class="card_list">
           <div>
             <img
-              src="http://www.qingmangxueche.com/KUpload/image/20180227/20180227183732_5639.jpg"
-              alt
+              src="../assets/img/index_suj1.jpg"
+              alt=""
               style="width:100%;height:264px;border-radius:10px 10px 0px 0px;"
-            />
+            >
           </div>
           <div class="card_detail">
             <div class="card_title">
@@ -79,36 +128,27 @@
                   </span>
                 </div>
                 <div class="btn_bottom">
-                  <span  class="money"><span>￥</span> 4580</span>
-                    <div class="show_btn" @click="dialogVisible=true">立即报名</div>
+                  <span class="money">
+                    <span>￥</span>4680
+                  </span>
+                  <div class="show_btn" @click="dialogVisible=true">立即报名</div>
                 </div>
-              
               </div>
             </div>
-            <div style="height:40px">
-              <vue-seamless-scroll
-                :data="newsList"
-                :class-option="optionLeft"
-                class="seamless-warp2"
-              >
-                <ul class="item">
-                  <li v-for="item in newsList" :key="item">{{item}}报名成功</li>
-                </ul>
-              </vue-seamless-scroll>
-            </div>
+        
           </div>
         </div>
-      <div class="card_list">
+        <div class="card_list">
           <div>
             <img
-              src="http://www.qingmangxueche.com/KUpload/image/20180227/20180227183732_5639.jpg"
-              alt
+               src="../assets/img/index_suj.png"
+              alt=""
               style="width:100%;height:264px;border-radius:10px 10px 0px 0px;"
-            />
+            >
           </div>
           <div class="card_detail">
             <div class="card_title">
-              <span>C1标准班</span>
+              <span>C2标准班</span>
             </div>
             <div class="img_list">
               <div class="details">
@@ -137,31 +177,46 @@
                   </span>
                 </div>
                 <div class="btn_bottom">
-                  <span  class="money"><span>￥</span> 4580</span>
-                    <div class="show_btn" @click="dialogVisible=true">立即报名</div>
+                  <span class="money">
+                    <span>￥</span>5380
+                  </span>
+                  <div class="show_btn" @click="dialogVisible=true">立即报名</div>
                 </div>
-              
               </div>
-            </div>
-            <div style="height:40px">
-              <vue-seamless-scroll
-                :data="newsList2"
-                :class-option="optionLeft"
-                class="seamless-warp2"
-              >
-                <ul class="item">
-                  <li v-for="item in newsList" :key="item">{{item}}报名成功</li>
-                </ul>
-              </vue-seamless-scroll>
             </div>
           </div>
         </div>
       </div>
       <el-dialog :visible.sync="dialogVisible">
         <logincom></logincom>
-      </el-dialog>
+      </el-dialog> -->
+
+        <div class="coach_list">
+          <div class="item" v-for="item in coach_list" :key="item.id">
+            <div style="display:flex">
+              <div>
+                <img :src="item.image" alt style="width:200px;height:120px;" />
+              </div>
+              <div class="center">
+                <span class="school_name">{{item.schoolName}}</span>
+                 <span>
+                  <el-rate v-model="item.score" disabled></el-rate>
+                </span>
+                <span class="location"><img src="../assets/img/dingwei.png" alt=""> 驾校地址：{{item.location}}</span>
+               
+              </div>
+            </div>
+
+            <div class="money">￥{{item.fee}}</div>
+          </div>
+
+          <el-pagination layout="prev, pager, next" :current-page.sync ="page" :total="50" @current-change="currentChange()"></el-pagination>
+        </div>
+
     </div>
 
+
+    
     <div
       id="rightArrow"
       @click="tagleStatus=!tagleStatus"
@@ -175,17 +230,17 @@
         <ul class="floatDqq">
           <li style="padding-left:0px;">
             <a target="_blank" href="tencent://message/?uin=1044170311&Site=sc.chinaz.com&Menu=yes">
-              <img src="../assets/img/qq.png" align="absmiddle" />&nbsp;&nbsp;在线客服1号
+              <img src="../assets/img/qq.png" align="absmiddle">&nbsp;&nbsp;在线客服1号
             </a>
           </li>
           <li style="padding-left:0px;">
             <a target="_blank" href="tencent://message/?uin=1044170311&Site=sc.chinaz.com&Menu=yes">
-              <img src="../assets/img/qq.png" align="absmiddle" />&nbsp;&nbsp;在线客服2号
+              <img src="../assets/img/qq.png" align="absmiddle">&nbsp;&nbsp;在线客服2号
             </a>
           </li>
           <li style="padding-left:0px;">
             <a target="_blank" href="tencent://message/?uin=1044170311&Site=sc.chinaz.com&Menu=yes">
-              <img src="../assets/img/qq.png" align="absmiddle" />&nbsp;&nbsp;在线客服3号
+              <img src="../assets/img/qq.png" align="absmiddle">&nbsp;&nbsp;在线客服3号
             </a>
           </li>
         </ul>
@@ -196,7 +251,7 @@
 
 <script>
 // @ is an alias to /src
-import logincom from "@/components/login";
+//import logincom from "@/components/login";
 import banner from "@/components/banner";
 export default {
   data() {
@@ -205,14 +260,24 @@ export default {
       dialogVisible: false,
       user: {},
       newsList: [],
-      newsList2: []
+      newsList2: [],
+      simbal_phone: "",
+        coach_list: [],
+         page: 1,
     };
   },
   components: {
-    logincom,
     banner
   },
   methods: {
+    currentChange(){
+      this.querySchool()
+    },
+      querySchool() {
+      this.$api.querySchool({ page: this.page,size:5 }).then(res => {
+        this.coach_list = res.data.data;
+      });
+    },
     getMoblieNum() {
       var numArray = new Array(
         "139",
@@ -267,6 +332,25 @@ export default {
       });
       return arr; //修改span的内容，每次都是清空修改，而不是叠加
     },
+    submitUser1() {
+      if (this.simbal_phone == "" || this.simbal_phone == undefined) {
+        this.$message.error("手机号码不能为空");
+        return;
+      }
+      this.$api
+        .saveApply({
+          phone: this.simbal_phone,
+          nickName: this.simbal_phone,
+          location: this.simbal_phone
+        })
+        .then(res => {
+          if (res.data.success) {
+            this.$message.success("您已提交成功，我们会尽快联系您");
+          } else {
+            this.$message.error(res.data.message);
+          }
+        });
+    },
     submitUser() {
       if (this.user.nickName == "" || this.user.nickName == undefined) {
         this.$message.error("姓名不能为空");
@@ -292,6 +376,7 @@ export default {
   created() {
     this.newsList = this.getMoblieNum();
     this.newsList2 = this.getMoblieNum();
+    this.querySchool()
   },
   computed: {
     optionLeft() {
@@ -304,6 +389,115 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.coach_list {
+  width: 800px;
+  margin: 0 auto;
+      margin-top: 30px;
+      padding-top: 30px;
+      .item {
+        display: flex;
+        padding-bottom: 20px;
+        justify-content: space-between;
+        .center {
+          display: flex;
+          flex-direction: column;
+          margin-left:40px;
+          justify-content: space-between;
+          .school_name {
+            font-size:22px;
+            font-weight:bold;
+            color: #333631;
+          }
+          .location {
+            font-size: 18px;
+            color: #ACB4B9;
+            margin: 15px 0px;
+            display: flex;
+            align-items: center;
+            img{
+              margin-right: 8px;
+            }
+          }
+        }
+        .money {
+          font-size: 22px;
+          font-weight: 700;
+          color: #FB560A;
+          align-items: center;
+          display: flex;
+        }
+      }
+    }
+.fixed_left{
+  width:300px;
+      position: fixed;
+    background: #f5a63b;
+    z-index: 99;
+    padding: 40px 20px;
+    border-radius: 15px;
+    bottom:0px;
+    .bottom-text {
+    text-align: center;
+    font-size: 14px;
+    color: #000 !important;
+    color: rgba(192, 196, 204, 1);
+    line-height: 14px;
+    margin-bottom:10px;
+  }
+    .pop-btn {
+    height: 55px;
+    background: #fff;
+    box-shadow: 5px 5px 20px rgba(155, 202, 100, 0.3);
+    border-radius: 4px;
+    margin: 0 auto;
+    line-height: 55px;
+       color: #f5a63b;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 18px;
+    cursor: pointer;
+  }
+    .item{
+      width: 100%;
+      margin-bottom: 20px;
+      input{
+        color: #000;
+        &::input-placeholder{
+          color: #000;
+        } 
+      }
+    }
+}
+.regist_nav {
+  background-color: #282d2c;
+  padding: 25px 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  input {
+    height: 45px;
+    font-size: 20px;
+    color: #666;
+    padding-left: 20px;
+    line-height: 41px;
+    border: none;
+    outline: none;
+    width: 450px;
+    overflow: hidden;
+  }
+  button {
+    background: rgba(155, 202, 100, 1);
+    box-shadow: 5px 5px 20px rgba(155, 202, 100, 0.3);
+    border-radius: 4px;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    height: 47px;
+    margin-left: 15px;
+  }
+}
 .tagactive {
   right: -175px !important;
 }
@@ -378,15 +572,16 @@ ul {
 }
 .seamless-warp2 {
   overflow: hidden;
-  height: 30px;
-  width: 100%;
-  color: #545454;
-  font-size: 14px;
+  height:40px;
+  width: 1000px;
+  margin: 0 auto;
+  font-size: 18px;
   ul.item {
     width: 580px;
     li {
       float: left;
       margin-right: 10px;
+        color: #000
     }
   }
 }
@@ -460,12 +655,12 @@ ul {
   display: flex;
 }
 .card_warper {
-  width: 1220px;
+  width: 1000px;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
-    padding: 20px 0px 109px 0px;
+  padding: 20px 0px 109px 0px;
   .card_list {
     width: 390px;
     border-radius: 5px;
@@ -473,47 +668,47 @@ ul {
     box-sizing: border-box;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.06);
     border-radius: 10px 10px 0px 0px;
-    .card_detail{
+    .card_detail {
       padding: 25px 32px;
-      .btn_bottom{
+      .btn_bottom {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 5px 0px;
-          .money {
-        color: #FB560A;
-        font-size: 29px;
-        font-weight: bold;
-        span{font-size: 22px}
-      }
-         .show_btn {
-           width:158px;
-          height:47px;
-          border:1px solid rgba(155,202,100,1);
-          border-radius:24px;
-          color: #9BCA64;
+        .money {
+          color: #fb560a;
+          font-size: 29px;
+          font-weight: bold;
+          span {
+            font-size: 22px;
+          }
+        }
+        .show_btn {
+          width: 158px;
+          height: 47px;
+          border: 1px solid rgba(155, 202, 100, 1);
+          border-radius: 24px;
+          color: #9bca64;
           text-align: center;
           line-height: 47px;
           cursor: pointer;
-         font-size:17px; 
-
+          font-size: 17px;
         }
       }
     }
     .card_title {
       display: flex;
       justify-content: space-between;
-      color: #2A2828;
-      font-weight:bold;
-      font-size:22px;
-    
+      color: #2a2828;
+      font-weight: bold;
+      font-size: 22px;
     }
     .img_list {
       display: flex;
       margin-top: 10px;
       .details {
         flex: 1;
-       
+
         .item {
           margin-bottom: 15px;
           span {
