@@ -328,8 +328,9 @@ export default {
         } //从第一个手机号后面到最后一个之前用逗号分隔
       }
       let arr = numList.split(",").map(item => {
-        return item.substring(0, 3) + "XXXX" + item.substring(6, 11);
+        return item.substring(0, 3) + "XXXX" + item.substring(6, 10);
       });
+      console.log(arr)
       return arr; //修改span的内容，每次都是清空修改，而不是叠加
     },
     submitUser1() {
@@ -375,14 +376,13 @@ export default {
   },
   created() {
     this.newsList = this.getMoblieNum();
-    this.newsList2 = this.getMoblieNum();
     this.querySchool()
   },
   computed: {
     optionLeft() {
       return {
         direction: 2,
-        limitMoveNum: 2
+        limitMoveNum: 1
       };
     }
   }
@@ -511,31 +511,41 @@ export default {
   top: 180px;
   right: 0;
   z-index: 999;
+      border-radius: 0px 0px 0px 10px;
+    overflow: hidden;
 }
 #floatDivBoxs .floatDtt {
   width: 100%;
   height: 45px;
   line-height: 45px;
-  background: #f08326;
+  background: #F4A53B;
   color: #fff;
   font-size: 18px;
   text-indent: 22px;
   position: relative;
+ 
+
 }
 #floatDivBoxs .floatDqq {
   padding: 0 14px;
   margin: 0px;
+  color: #208FE4;
+
 }
 #floatDivBoxs .floatDqq li {
   height: 45px;
   line-height: 45px;
   font-size: 15px;
-  border-bottom: 1px solid #e3e3e3;
-  padding: 0 0 0 50px;
+  border-bottom: 1px solid #F5F5F5;
+  padding: 5px 0 5px 50px;
+}
+#floatDivBoxs .floatDqq li a{
+  color:#208FE4;
+  text-decoration: none;
+
 }
 #floatDivBoxs .floatDtxt {
   font-size: 18px;
-  color: #333;
   padding: 12px 14px;
 }
 #floatDivBoxs .floatDtel {
@@ -555,13 +565,16 @@ export default {
   box-shadow: -2px 0 3px rgba(0, 0, 0, 0.25);
 }
 #rightArrow {
-  width: 50px;
-  height: 45px;
-  background: url(../assets/img/online_arrow.jpg) no-repeat;
+  width: 68px;
+  height:45px;
   position: fixed;
   top: 180px;
   right: 170px;
   z-index: 999;
+  display: flex;
+box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+border-radius:10px 0px 0px 10px;
+  background: url(../assets/img/kefu.png) no-repeat rgba(244,165,59,1) center center;
 }
 #rightArrow a {
   display: block;
